@@ -1,0 +1,28 @@
+<style>
+table,th,td{
+	border: 1px solid blue;
+}
+</style>
+{% if agentes %}
+	<table style="border: 1px solid blue">
+		<tr>
+			<th>Id agente</th>
+			<th>Nombre agente</th>
+			<th>Apellido agente</th>
+			<th>DNI</th>
+			<th>Fecha nacimiento</th>
+
+		</tr>
+	    {% for agen in agentes %}
+	    	<tr>
+	        	<td>{{ agen.id }}</td>
+	        	<td>{{ agen.nombre }}</td>
+	        	<td>{{ agen.apellido }}</td>
+	        	<td>{{ agen.documento }}</td>
+	        	<td>{{ agen.fecha_nacimiento }}</td>
+	    	</tr>
+	    {% endfor %}
+	</table>
+{% else %}
+    <p>No hay agentes a mostrar</p>
+{% endif %}
