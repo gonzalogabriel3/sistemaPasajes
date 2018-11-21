@@ -4,7 +4,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<int:agente_id>/', views.agente, name='showAgente'),
-    path('agente', views.indexAgente, name='agente'),
-    path('agente2', views.indexAgente2, name='agente2'),
+    path('agente', views.indexAgenteView, name='agente'),
+    path('localidad', views.indexLocalidadView, name='localidad'),
+    path('familiar', views.indexFamiliarView, name='familiar'),
+    path('empresa', views.indexEmpresaView, name='empresa'),
+    path('pasaje', views.indexPasajeView, name='pasaje'),
+
 ]

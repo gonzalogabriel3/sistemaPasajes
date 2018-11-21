@@ -1,0 +1,37 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+	{% if pasajes %}
+	<table class="table table-hover">
+		<tr>
+			<th>Id pasaje</th>
+			<th>Agente</th>
+			<th>Empresa</th>
+			<th>Fecha de emision</th>
+			<th>Origen</th>
+			<th>Destino</th>
+
+
+		</tr>
+	    {% for pasaje in pasajes %}
+	    	<tr>
+	        	<td>{{ pasaje.id }}</td>
+	        	<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
+	        	<td>{{ pasaje.id_empresa.nombre }}</td>
+	        	<td>{{ pasaje.fecha_emision }}</td>
+	        	<td>{{ pasaje.origen }}</td>
+	        	<td>{{ pasaje.destino }}</td>
+	        	
+	    	</tr>
+	    {% endfor %}
+	</table>
+{% else %}
+    <p>No hay pasajes a mostrar</p>
+{% endif %}
+			<br><br>
+			<!--indico el nombre de la url definido en urls/urlpatterns-->
+    		<center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
+		
+		
+
+{% endblock %}

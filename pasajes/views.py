@@ -1,30 +1,54 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Agente
+from .models import *
 # Create your views here
 
 def index(request):
-	return HttpResponse("Hola mundo!")
+	return render(request, 'index.html')
 
-def agente(request,agente_id):
-	return HttpResponse("Identificador de agente:  %s" %agente_id)
-
-#Funcion para retornar los datos de la tabla de agente
-def indexAgente(request):
-	agentes=Agente.objects.all()
-	output=""
-	
-	for agen in agentes:
-		output+=str(agen.id)+":"+agen.nombre+" "+agen.apellido+"\n"
-	
-	return HttpResponse(output)
 
 #Funcion para retornar los datos de la tabla de agente renderizados en un template
-def indexAgente2(request):
+def indexAgenteView(request):
 	agentes=Agente.objects.all()
 	
 	context={
 		'agentes':agentes,
 	}
 	
-	return render(request, 'pasajes/templates/prueba.html', context)
+	return render(request, 'indexAgente.html', context)
+
+def indexLocalidadView(request):
+	localidades=Localidad.objects.all()
+	
+	context={
+		'localidades':localidades,
+	}
+	
+	return render(request, 'indexLocalidad.html', context)
+
+def indexFamiliarView(request):
+	familiares=Familiar.objects.all()
+	
+	context={
+		'familiares':familiares,
+	}
+	
+	return render(request, 'indexFamiliar.html', context)
+
+def indexEmpresaView(request):
+	empresas=Empresa.objects.all()
+	
+	context={
+		'empresas':empresas,
+	}
+	
+	return render(request, 'indexEmpresa.html', context)
+
+def indexPasajeView(request):
+	pasajes=Pasaje.objects.all()
+	
+	context={
+		'pasajes':pasajes,
+	}
+	
+	return render(request, 'indexPasaje.html', context)

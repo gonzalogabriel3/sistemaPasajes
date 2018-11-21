@@ -1,0 +1,28 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+
+{% if localidades %}
+	<table class="table table-hover">
+		<tr>
+			<th>Id localidad</th>
+			<th>Nombre localidad</th>
+			
+
+		</tr>
+	    {% for localidad in localidades %}
+	    	<tr>
+	        	<td>{{ localidad.id }}</td>
+	        	<td>{{ localidad.nombre }}</td>
+	        	
+	    	</tr>
+	    {% endfor %}
+	</table>
+{% else %}
+    <p>No hay localidades a mostrar</p>
+{% endif %}
+
+	<br><br>
+    <center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
+
+{% endblock %}

@@ -6,7 +6,7 @@ class Localidad(models.Model):
 	nombre=models.CharField(max_length=200)
 
 	def __str__(self):
-		return self.nombre
+		return str(self.id)+"/"+self.nombre
 
 class Agente(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
@@ -17,7 +17,7 @@ class Agente(models.Model):
 	fecha_nacimiento=models.DateField()
 
 	def __str__(self):
-		return self
+		return str(self.id)+"/"+str(self.documento)+"/"+self.apellido+"-"+self.nombre+"/"+str(self.fecha_nacimiento)
 
 class Familiar(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
@@ -29,7 +29,7 @@ class Familiar(models.Model):
 	fecha_nacimiento=models.DateField()
 
 	def __str__(self):
-		return self.apellido+" "+self.nombre
+		return self.apellido+"/"+self.nombre
 
 class Empresa(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
@@ -38,7 +38,7 @@ class Empresa(models.Model):
 	nombre=models.CharField(max_length=200)
 
 	def __str__(self):
-		return self.nombre
+		return self.nombre+"/"+str(self.cuit)
 
 class Pasaje(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
@@ -49,6 +49,6 @@ class Pasaje(models.Model):
 	destino=models.CharField(max_length=200)
 
 	def __str__(self):
-		return str(self.id)+"	"+self.origen+"-"+self.destino+"	"+self.id_empresa.nombre
+		return str(self.id)+"/"+self.origen+"-"+self.destino+"/"+self.id_empresa.nombre
 
 
