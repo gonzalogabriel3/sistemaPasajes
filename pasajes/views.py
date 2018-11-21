@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 # Create your views here
+
+#################################INDEX'S#################################################
 
 def index(request):
 	return render(request, 'index.html')
@@ -52,3 +55,13 @@ def indexPasajeView(request):
 	}
 	
 	return render(request, 'indexPasaje.html', context)
+
+
+################FIN DE INDEX'S########################################
+
+
+################FORMULARIOS###########################################
+def abmAgente(request):
+	form=formularioAgente()
+
+	return render(request,'formularios/agente.html',{'form':form})
