@@ -11,7 +11,7 @@ urlpatterns = [
     path('pasaje', views.indexPasajeView, name='pasaje'),
 
     ####Formularios#####
-    path('abmAgente/<int:idAgente>/', views.abmAgente, name='abmAgente'),
+    path('altaAgente', views.altaAgente, name='altaAgente'),
 
 
 ]

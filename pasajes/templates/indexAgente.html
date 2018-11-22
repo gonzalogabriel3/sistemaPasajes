@@ -2,14 +2,14 @@
 
 {% block contenido %}
 <br>
-<a href="{% url 'abmAgente' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo agente</a>
+<a href="{% url 'altaAgente' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo agente</a>
 <br><br>
 {% if agentes %}
 	<table class="table table-hover">
 		<tr>
 			<th>Id agente</th>
-			<th>Nombre agente</th>
-			<th>Apellido agente</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
 			<th>DNI</th>
 			<th>Fecha nacimiento</th>
 			<th>Localidad</th>
@@ -25,7 +25,7 @@
 	        	<td>{{ agen.fecha_nacimiento }}</td>
 	        	<td>{{ agen.id_localidad.nombre }}</td>
 	        	<td>
-	        		<a href="{% url 'abmAgente'  %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+	        		<a href="{% url 'altaAgente'  %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 	        		<a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
 	        	</td>
 	    	</tr>

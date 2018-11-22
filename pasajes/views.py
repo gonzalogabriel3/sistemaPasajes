@@ -62,27 +62,19 @@ def indexPasajeView(request):
 
 
 ################FORMULARIOS###########################################
-def abmAgente(request,idAgente):
+def altaAgente(request):
 
-	#Recibo el request
+	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
 	if(request.method == 'POST'):
-		#Si no se recibio ningun id de un agente,valido el formulario y guardo un nuevo agente
-		if(idAgente==0):
-
-			form=formularioAgente(request.POST)
-			
-			
-		#Si se recibe un id creo un formulario en base a los datos del agente
-		else:
-			agente=Agente.objects.get(pk=idAgente)
-			form=formularioAgente(instance=agente)
-			
+		
+		form=formularioAgente(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
 				agente=form.save(commit=False)
 				agente.save()
 				return HttpResponseRedirect('agente')
-
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioAgente()
 		
