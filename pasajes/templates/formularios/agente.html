@@ -1,14 +1,15 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
-	<center><h2>Agregar nuevo agente</h2></center>
+	<center><h2 style="color:grey">Agregar nuevo agente</h2></center>
 	<br>
 	<form action="" method="POST">{% csrf_token %}
 		{{form.as_p}}
-		<input type="submit" value="Submit">
+		<br>
+		<center>
+			<input type="submit" value="Agregar" class="btn btn-success">
+			<a href="{% url 'agente' %}"  class="btn btn-danger">Cancelar</a>
+		</center>
 	</form>
-	
-	<br><br>
-    <center><a href="{% url 'agente' %}"  class="btn btn-danger">Cancelar</a></center>
 
 {% endblock %}

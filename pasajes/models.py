@@ -6,15 +6,15 @@ class Localidad(models.Model):
 	nombre=models.CharField(max_length=200)
 
 	def __str__(self):
-		return str(self.id)+"/"+self.nombre
+		return self.nombre
 
 class Agente(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
-	id_localidad=models.ForeignKey(Localidad, on_delete=models.CASCADE)
-	documento=models.IntegerField(unique=True)
 	nombre=models.CharField(max_length=200)
 	apellido=models.CharField(max_length=200)
+	documento=models.IntegerField(unique=True)
 	fecha_nacimiento=models.DateField()
+	id_localidad=models.ForeignKey(Localidad, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return str(self.id)+"/"+str(self.documento)+"/"+self.apellido+"-"+self.nombre+"/"+str(self.fecha_nacimiento)

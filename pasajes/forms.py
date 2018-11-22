@@ -1,14 +1,26 @@
-from django.forms import ModelForm
 from django import forms
 from .models import *
 
-class formularioAgente(ModelForm):
-	nombre=forms.CharField(label='Nombre', max_length=100)
-	apellido=forms.CharField(label='Apellido', max_length=100)
-	documento=forms.IntegerField(label='Nro documento')
-	localidad=forms.IntegerField(label='Localidad')
-	fecha_nacimiento=forms.DateField(label='Fecha de nacimiento')
+class formularioAgente(forms.ModelForm):
+	
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	nombre = forms.CharField(max_length=100,label="Nombre del agente",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	apellido = forms.CharField(max_length=100,label="Apellido del agente",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	documento = forms.IntegerField(label="Documento del agente",
+		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
+
+	fecha_nacimiento=forms.DateField(label="Fecha nacimiento",
+		widget = forms.DateInput(attrs = {'class' : 'form-control'}))
+
+	#id_localidad=forms.IntegerField(label="Localidad",widget=forms.Select(queryset=Localidad.objects.all()))
 
 	class Meta:
 		model=Agente
-		fields="__all__"
+		exclude=['id']
+
+	
+        
