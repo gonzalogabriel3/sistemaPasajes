@@ -79,3 +79,18 @@ def altaAgente(request):
 		form=formularioAgente()
 		
 	return render(request,'formularios/agente.html',{'form':form})
+
+def modificacionAgente(request,idAgente):
+	
+	agente=Agente.objects.get(id= idAgente)
+	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un agente
+	if(request.method == 'GET'):
+		form=formularioAgente(instance=agente)
+	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el agente	
+	else:
+		form=formularioAgente(request.POST,instance = agente)
+		if(form.is_valid()):
+			form.save()
+			return HttpResponseRedirect('agente')
+	
+	return render(request,'formularios/agente.html',{'form':form,'agente':agente})

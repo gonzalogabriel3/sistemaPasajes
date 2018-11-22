@@ -25,7 +25,7 @@
 	        	<td>{{ agen.fecha_nacimiento }}</td>
 	        	<td>{{ agen.id_localidad.nombre }}</td>
 	        	<td>
-	        		<a href="{% url 'altaAgente'  %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+	        		<a href="{% url 'modificacionAgente' agen.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 	        		<a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
 	        	</td>
 	    	</tr>
