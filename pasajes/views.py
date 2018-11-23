@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from .models import *
 from .forms import *
 # Create your views here
@@ -72,25 +73,37 @@ def altaAgente(request):
 		if(form.is_valid()):
 				agente=form.save(commit=False)
 				agente.save()
-				return HttpResponseRedirect('agente')
+				return redirect('agente')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioAgente()
+		titulo="Agregar nuevo agente"
 		
-	return render(request,'formularios/agente.html',{'form':form})
+	return render(request,'formularios/agente.html',{'form':form,'titulo':titulo})
 
 def modificacionAgente(request,idAgente):
-	
-	agente=Agente.objects.get(id= idAgente)
+
+	agente=Agente.objects.get(id=idAgente)
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un agente
 	if(request.method == 'GET'):
 		form=formularioAgente(instance=agente)
+		titulo="Modificar agente"
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el agente	
-	else:
-		form=formularioAgente(request.POST,instance = agente)
+	elif(request.method == "POST"):
+		form=formularioAgente(request.POST, instance = agente)
 		if(form.is_valid()):
 			form.save()
-			return HttpResponseRedirect('agente')
+			return redirect('agente')
+
 	
-	return render(request,'formularios/agente.html',{'form':form,'agente':agente})
+	return render(request,'formularios/agente.html',{'form':form,'agente':agente,'titulo':titulo})
+
+def bajaAgente(request,idAgente):
+
+	agente=Agente.objects.get(id=idAgente)
+
+	if(request.method=="POST"):
+		agente.delete()
+		return redirect('agente')
+
