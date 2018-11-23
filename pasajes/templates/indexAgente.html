@@ -25,8 +25,8 @@
 	        	<td>{{ agen.fecha_nacimiento }}</td>
 	        	<td>{{ agen.id_localidad.nombre }}</td>
 	        	<td>
-	        		<a href="{% url 'modificacionAgente' agen.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
-	        		<a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        		<a href="{% url 'modificacionAgente' agen.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>Editar</a>
+	        		<a href="{% url 'bajaAgente' agen.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
 	        	</td>
 	    	</tr>
 	    {% endfor %}
@@ -39,4 +39,3 @@
     	<center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
 
 {% endblock %}
-

@@ -1,0 +1,16 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+	
+	<h4>Desea eliminar a {{texto}}</h4>
+	<center>
+	<form method="POST">
+		{% csrf_token %}
+
+		<input type="submit" value="Eliminar" class="btn btn-success">
+		<a href="{% url 'agente' %}"  class="btn btn-info">Cancelar</a>
+
+	</form>
+	</center>
+	
+{% endblock %}

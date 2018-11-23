@@ -107,3 +107,6 @@ def bajaAgente(request,idAgente):
 		agente.delete()
 		return redirect('agente')
 
+	texto="el agente "+agente.nombre+",con id "+str(agente.id)+"?"
+
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto})

@@ -13,6 +13,7 @@ urlpatterns = [
     ####Formularios#####
     path('altaAgente', views.altaAgente, name='altaAgente'),
     path('modificacionAgente/<int:idAgente>/', views.modificacionAgente, name='modificacionAgente'),
+    path('bajaAgente/<int:idAgente>/', views.bajaAgente, name='bajaAgente'),
 
 
 ]
