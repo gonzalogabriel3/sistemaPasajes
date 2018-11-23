@@ -63,6 +63,8 @@ def indexPasajeView(request):
 
 
 ################FORMULARIOS###########################################
+
+#********ABM AGENTE***********#
 def altaAgente(request):
 
 	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
@@ -82,6 +84,19 @@ def altaAgente(request):
 		
 	return render(request,'formularios/agente.html',{'form':form,'titulo':titulo})
 
+def bajaAgente(request,idAgente):
+
+	agente=Agente.objects.get(id=idAgente)
+
+	if(request.method=="POST"):
+		agente.delete()
+		return redirect('agente')
+
+	texto="el agente '"+agente.nombre+" "+agente.apellido+"',con id "+str(agente.id)+"?"
+	nombreUrl="agente"
+
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
+
 def modificacionAgente(request,idAgente):
 
 	agente=Agente.objects.get(id=idAgente)
@@ -99,14 +114,170 @@ def modificacionAgente(request,idAgente):
 	
 	return render(request,'formularios/agente.html',{'form':form,'agente':agente,'titulo':titulo})
 
-def bajaAgente(request,idAgente):
+#********FIN ABM AGENTE***********#
 
-	agente=Agente.objects.get(id=idAgente)
+
+#********ABM LOCALIDAD***********#
+def altaLocalidad(request):
+
+	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
+	if(request.method == 'POST'):
+		
+		form=formularioLocalidad(request.POST)	
+		#Valido el formulario
+		if(form.is_valid()):
+				agente=form.save(commit=False)
+				agente.save()
+				return redirect('localidad')
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
+	else:
+		form=formularioLocalidad()
+		titulo="Agregar nueva localidad"
+		
+	return render(request,'formularios/localidad.html',{'form':form,'titulo':titulo})
+
+
+
+def bajaLocalidad(request,idLocalidad):
+
+	localidad=Localidad.objects.get(id=idLocalidad)
 
 	if(request.method=="POST"):
-		agente.delete()
-		return redirect('agente')
+		localidad.delete()
+		return redirect('localidad')
 
-	texto="el agente "+agente.nombre+",con id "+str(agente.id)+"?"
+	texto="la localidad '"+localidad.nombre+"',con id "+str(localidad.id)+"?"
+	nombreUrl="localidad"
 
-	return render(request,'confirmaciones/eliminar.html',{'texto':texto})
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
+
+def modificacionLocalidad(request,idLocalidad):
+
+	localidad=Localidad.objects.get(id=idLocalidad)
+	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Localidad
+	if(request.method == 'GET'):
+		form=formularioLocalidad(instance=localidad)
+		titulo="Modificar localidad"
+	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Localidad	
+	elif(request.method == "POST"):
+		form=formularioLocalidad(request.POST, instance = localidad)
+		if(form.is_valid()):
+			form.save()
+			return redirect('localidad')
+
+	
+	return render(request,'formularios/localidad.html',{'form':form,'localidad':localidad,'titulo':titulo})
+
+
+#********FIN ABM LOCALIDAD***********#
+
+
+#********ABM FAMILIAR***********#
+def altaFamiliar(request):
+
+	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
+	if(request.method == 'POST'):
+		
+		form=formularioFamiliar(request.POST)	
+		#Valido el formulario
+		if(form.is_valid()):
+				agente=form.save(commit=False)
+				agente.save()
+				return redirect('familiar')
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
+	else:
+		form=formularioFamiliar()
+		titulo="Agregar nuevo familiar"
+		
+	return render(request,'formularios/familiar.html',{'form':form,'titulo':titulo})
+
+def bajaFamiliar(request,idFamiliar):
+
+	familiar=Familiar.objects.get(id=idFamiliar)
+
+	if(request.method=="POST"):
+		familiar.delete()
+		return redirect('familiar')
+
+	texto="el familiar '"+familiar.nombre+" "+familiar.apellido+"',con id "+str(familiar.id)+"?"
+	nombreUrl="familiar"
+
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
+
+def modificacionFamiliar(request,idFamiliar):
+
+	familiar=Familiar.objects.get(id=idFamiliar)
+	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Familiar
+	if(request.method == 'GET'):
+		form=formularioFamiliar(instance=familiar)
+		titulo="Modificar familiar"
+	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Familiar	
+	elif(request.method == "POST"):
+		form=formularioFamiliar(request.POST, instance = familiar)
+		if(form.is_valid()):
+			form.save()
+			return redirect('familiar')
+
+	
+	return render(request,'formularios/familiar.html',{'form':form,'familiar':familiar,'titulo':titulo})
+
+
+#********FIN ABM FAMILIAR***********#
+
+
+
+#********ABM EMPRESA***********#
+def altaEmpresa(request):
+
+	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
+	if(request.method == 'POST'):
+		
+		form=formularioEmpresa(request.POST)	
+		#Valido el formulario
+		if(form.is_valid()):
+				agente=form.save(commit=False)
+				agente.save()
+				return redirect('empresa')
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
+	else:
+		form=formularioEmpresa()
+		titulo="Agregar nueva empresa"
+		
+	return render(request,'formularios/empresa.html',{'form':form,'titulo':titulo})
+
+
+def bajaEmpresa(request,idEmpresa):
+
+	empresa=Empresa.objects.get(id=idEmpresa)
+
+	if(request.method=="POST"):
+		empresa.delete()
+		return redirect('empresa')
+
+	texto="la empresa '"+empresa.nombre+"',con id "+str(empresa.id)+"?"
+	nombreUrl="empresa"
+
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
+
+def modificacionEmpresa(request,idEmpresa):
+
+	empresa=Empresa.objects.get(id=idEmpresa)
+	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Empresa
+	if(request.method == 'GET'):
+		form=formularioEmpresa(instance=empresa)
+		titulo="Modificar empresa"
+	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Empresa	
+	elif(request.method == "POST"):
+		form=formularioEmpresa(request.POST, instance = empresa)
+		if(form.is_valid()):
+			form.save()
+			return redirect('empresa')
+
+	
+	return render(request,'formularios/empresa.html',{'form':form,'empresa':empresa,'titulo':titulo})
+
+
+#********FIN ABM EMPRESA***********#

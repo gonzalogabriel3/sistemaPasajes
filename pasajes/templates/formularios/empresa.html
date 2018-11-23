@@ -1,0 +1,15 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+	<center><h2 style="color:grey">{{titulo}}</h2></center>
+	<br>
+	<form action="" method="POST">{% csrf_token %}
+		{{form.as_p}}
+		<br>
+		<center>
+			<input type="submit" value="Guardar" class="btn btn-success">
+			<a href="{% url 'empresa' %}"  class="btn btn-danger">Cancelar</a>
+		</center>
+	</form>
+
+{% endblock %}

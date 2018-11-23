@@ -22,5 +22,49 @@ class formularioAgente(forms.ModelForm):
 		model=Agente
 		exclude=['id']
 
+
+class formularioLocalidad(forms.ModelForm):
 	
-        
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	nombre = forms.CharField(max_length=100,label="Nombre de la localidad",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	class Meta:
+		model=Localidad
+		exclude=['id']
+
+
+class formularioFamiliar(forms.ModelForm):
+	
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	nombre = forms.CharField(max_length=100,label="Nombre del familiar",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	apellido = forms.CharField(max_length=100,label="Apellido del familiar",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	documento = forms.IntegerField(label="Documento del familiar",
+		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
+
+	fecha_nacimiento=forms.DateField(label="Fecha nacimiento",
+		widget = forms.DateInput(attrs = {'class' : 'form-control'}))
+
+	
+	class Meta:
+		model=Familiar
+		exclude=['id']
+
+
+class formularioEmpresa(forms.ModelForm):
+	
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	nombre = forms.CharField(max_length=100,label="Nombre de la empresa",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	cuit = forms.IntegerField(label="Cuit",
+		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
+
+
+	class Meta:
+		model=Empresa
+		exclude=['id']

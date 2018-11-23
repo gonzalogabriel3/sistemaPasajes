@@ -1,6 +1,9 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
+<br>
+<a href="{% url 'altaEmpresa' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nueva empresa</a>
+<br><br>
 	{% if empresas %}
 	<table class="table table-hover">
 		<tr>
@@ -8,6 +11,7 @@
 			<th>Nombre</th>
 			<th>Localidad</th>
 			<th>Cuit</th>
+			<th>Acciones</th>
 
 		</tr>
 	    {% for empresa in empresas %}
@@ -16,6 +20,10 @@
 	        	<td>{{ empresa.nombre }}</td>
 	        	<td>{{ empresa.id_localidad.nombre }}</td>
 	        	<td>{{ empresa.cuit}}</td>
+	        	<td>
+	        		<a href="{% url 'modificacionEmpresa' empresa.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>Editar</a>
+	        		<a href="{% url 'bajaEmpresa' empresa.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        	</td>
 	    	</tr>
 	    {% endfor %}
 	</table>

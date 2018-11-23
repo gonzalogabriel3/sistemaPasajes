@@ -1,6 +1,9 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
+<br>
+<a href="{% url 'altaFamiliar' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo familiar</a>
+<br><br>
 	{% if familiares %}
 	<table class="table table-hover">
 		<tr>
@@ -11,6 +14,7 @@
 			<th>Fecha nacimiento</th>
 			<th>Localidad</th>
 			<th>Familiar de</th>
+			<th>Acciones</th>
 
 		</tr>
 	    {% for familiar in familiares %}
@@ -22,6 +26,10 @@
 	        	<td>{{ familiar.fecha_nacimiento }}</td>
 	        	<td>{{ familiar.id_localidad.nombre }}</td>
 	        	<td>{{ familiar.id_agente.apellido  }} {{ familiar.id_agente.nombre }}</td>
+	        	<td>
+	        		<a href="{% url 'modificacionFamiliar' familiar.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>Editar</a>
+	        		<a href="{% url 'bajaFamiliar' familiar.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        	</td>
 	    	</tr>
 	    {% endfor %}
 	</table>
