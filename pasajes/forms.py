@@ -68,3 +68,19 @@ class formularioEmpresa(forms.ModelForm):
 	class Meta:
 		model=Empresa
 		exclude=['id']
+
+
+
+class formularioPasaje(forms.ModelForm):
+	
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	origen = forms.CharField(max_length=100,label="Origen",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+	destino =  forms.CharField(max_length=100,label="Destino",
+		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+
+
+	class Meta:
+		model=Pasaje
+		exclude=['id']

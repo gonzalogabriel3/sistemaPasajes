@@ -32,5 +32,8 @@ urlpatterns = [
     path('bajaEmpresa/<int:idEmpresa>/', views.bajaEmpresa, name='bajaEmpresa'),
     path('modificacionEmpresa/<int:idEmpresa>/', views.modificacionEmpresa, name='modificacionEmpresa'),
 
+    #**ABM Pasaje**#
+    path('altaPasaje', views.altaPasaje, name='altaPasaje'),
+    path('bajaEmpresa/<int:idEmpresa>/', views.bajaEmpresa, name='bajaEmpresa'),
 
 ]

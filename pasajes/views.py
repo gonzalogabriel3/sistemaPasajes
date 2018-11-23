@@ -281,3 +281,30 @@ def modificacionEmpresa(request,idEmpresa):
 
 
 #********FIN ABM EMPRESA***********#
+
+
+
+
+#********ABM PASAJE***********#
+def altaPasaje(request):
+
+	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
+	if(request.method == 'POST'):
+		
+		form=formularioPasaje(request.POST)	
+		#Valido el formulario
+		if(form.is_valid()):
+				agente=form.save(commit=False)
+				agente.save()
+				return redirect('pasaje')
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
+	else:
+		form=formularioPasaje()
+		titulo="Agregar nuevo pasaje"
+		
+	return render(request,'formularios/pasaje.html',{'form':form,'titulo':titulo})
+
+
+
+
