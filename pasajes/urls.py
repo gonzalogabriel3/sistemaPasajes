@@ -18,7 +18,7 @@ urlpatterns = [
     path('bajaAgente/<int:idAgente>/', views.bajaAgente, name='bajaAgente'),
 
     #**ABM Localidad**#
-    path('altaLocalidad', views.altaLocalidad, name='altaAgente'),
+    path('altaLocalidad', views.altaLocalidad, name='altaLocalidad'),
     path('bajaLocalidad/<int:idLocalidad>/', views.bajaLocalidad, name='bajaLocalidad'),
     path('modificacionLocalidad/<int:idLocalidad>/', views.modificacionLocalidad, name='modificacionLocalidad'),
 
@@ -34,6 +34,7 @@ urlpatterns = [
 
     #**ABM Pasaje**#
     path('altaPasaje', views.altaPasaje, name='altaPasaje'),
-    path('bajaEmpresa/<int:idEmpresa>/', views.bajaEmpresa, name='bajaEmpresa'),
+    path('bajaPasaje/<int:idPasaje>/', views.bajaPasaje, name='bajaPasaje'),
+    path('modificacionPasaje/<int:idPasaje>/', views.modificacionPasaje, name='modificacionPasaje'),
 
 ]

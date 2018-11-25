@@ -84,3 +84,4 @@ class formularioPasaje(forms.ModelForm):
 	class Meta:
 		model=Pasaje
 		exclude=['id']
+		#(Si se desea que la fecha sea automatica)exclude=['id','fecha_emision']

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
+import datetime
 # Create your views here
 
 #################################INDEX'S#################################################
@@ -126,8 +127,8 @@ def altaLocalidad(request):
 		form=formularioLocalidad(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
-				agente=form.save(commit=False)
-				agente.save()
+				localidad=form.save(commit=False)
+				localidad.save()
 				return redirect('localidad')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
@@ -176,14 +177,13 @@ def modificacionLocalidad(request,idLocalidad):
 #********ABM FAMILIAR***********#
 def altaFamiliar(request):
 
-	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
 	if(request.method == 'POST'):
 		
 		form=formularioFamiliar(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
-				agente=form.save(commit=False)
-				agente.save()
+				familiar=form.save(commit=False)
+				familiar.save()
 				return redirect('familiar')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
@@ -231,14 +231,13 @@ def modificacionFamiliar(request,idFamiliar):
 #********ABM EMPRESA***********#
 def altaEmpresa(request):
 
-	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
 	if(request.method == 'POST'):
 		
 		form=formularioEmpresa(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
-				agente=form.save(commit=False)
-				agente.save()
+				emprsa=form.save(commit=False)
+				empresa.save()
 				return redirect('empresa')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
@@ -283,19 +282,19 @@ def modificacionEmpresa(request,idEmpresa):
 #********FIN ABM EMPRESA***********#
 
 
-
-
 #********ABM PASAJE***********#
 def altaPasaje(request):
 
-	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
+	
 	if(request.method == 'POST'):
 		
 		form=formularioPasaje(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
-				agente=form.save(commit=False)
-				agente.save()
+				pasaje=form.save(commit=False)
+				
+				#(Si se desea que la fecha de emision sea automatica)pasaje.fecha_emision=datetime.datetime.now()
+				pasaje.save()
 				return redirect('pasaje')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
@@ -305,6 +304,37 @@ def altaPasaje(request):
 		
 	return render(request,'formularios/pasaje.html',{'form':form,'titulo':titulo})
 
+def bajaPasaje(request,idPasaje):
 
+	pasaje=Pasaje.objects.get(id=idPasaje)
+
+	if(request.method=="POST"):
+		pasaje.delete()
+		return redirect('pasaje')
+
+	texto="el pasaje '"+str(pasaje.id)+"',emitido el dia "+str(pasaje.fecha_emision)+"?"
+	nombreUrl="pasaje"
+
+	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
+
+def modificacionPasaje(request,idPasaje):
+
+	pasaje=Pasaje.objects.get(id=idPasaje)
+	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Pasaje
+	if(request.method == 'GET'):
+		form=formularioPasaje(instance=pasaje)
+		titulo="Modificar Pasaje"
+	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Pasaje	
+	elif(request.method == "POST"):
+		form=formularioPasaje(request.POST, instance = pasaje)
+		if(form.is_valid()):
+			form.save()
+			return redirect('pasaje')
+
+	
+	return render(request,'formularios/pasaje.html',{'form':form,'pasaje':pasaje,'titulo':titulo})
+
+
+#********FIN ABM PASAJE***********#
 
 
