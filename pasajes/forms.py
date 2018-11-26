@@ -13,9 +13,10 @@ class formularioAgente(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del agente",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(label="Fecha nacimiento",
-		widget = forms.DateInput(attrs = {'class' : 'form-control'}))
-
+	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
 	#id_localidad=forms.IntegerField(label="Localidad",widget=forms.Select(queryset=Localidad.objects.all()))
 
 	class Meta:
@@ -46,8 +47,10 @@ class formularioFamiliar(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del familiar",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(label="Fecha nacimiento",
-		widget = forms.DateInput(attrs = {'class' : 'form-control'}))
+	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
 
 	
 	class Meta:
@@ -72,6 +75,11 @@ class formularioEmpresa(forms.ModelForm):
 
 
 class formularioPasaje(forms.ModelForm):
+
+	fecha_emision=forms.DateField(widget=forms.TextInput(attrs=
+                                {
+                                    'class':'datepicker'
+                                }))
 	
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	origen = forms.CharField(max_length=100,label="Origen",
