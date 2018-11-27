@@ -19,4 +19,5 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pasajes/', include('pasajes.urls')),
+    path(r'^select2/', include('django_select2.urls')),
 ]

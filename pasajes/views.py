@@ -32,6 +32,7 @@ def indexLocalidadView(request):
 	
 	return render(request, 'indexLocalidad.html', context)
 
+
 def indexFamiliarView(request):
 	familiares=Familiar.objects.all().order_by('-id')
 	
@@ -236,7 +237,7 @@ def altaEmpresa(request):
 		form=formularioEmpresa(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
-				emprsa=form.save(commit=False)
+				empresa=form.save(commit=False)
 				empresa.save()
 				return redirect('empresa')
 	

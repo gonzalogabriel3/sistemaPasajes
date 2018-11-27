@@ -1,7 +1,11 @@
 from django import forms
 from .models import *
+#from django_select2.forms import Select2MultipleWidget
+from django_select2.forms import *
 
 class formularioAgente(forms.ModelForm):
+
+	id_localidad=forms.ModelChoiceField(label="Localidad",queryset=Localidad.objects.all(),widget=Select2Widget)
 	
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre del agente",
@@ -37,6 +41,10 @@ class formularioLocalidad(forms.ModelForm):
 
 class formularioFamiliar(forms.ModelForm):
 	
+	id_localidad=forms.ModelChoiceField(label="Localidad",queryset=Localidad.objects.all(),widget=Select2Widget)
+
+	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
+
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre del familiar",
 		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
@@ -60,13 +68,14 @@ class formularioFamiliar(forms.ModelForm):
 
 class formularioEmpresa(forms.ModelForm):
 	
+	id_localidad=forms.ModelChoiceField(label="Localidad",queryset=Localidad.objects.all(),widget=Select2Widget)
+
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre de la empresa",
 		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
 
 	cuit = forms.IntegerField(label="Cuit",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
-
 
 	class Meta:
 		model=Empresa
@@ -75,6 +84,10 @@ class formularioEmpresa(forms.ModelForm):
 
 
 class formularioPasaje(forms.ModelForm):
+
+	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
+
+	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
 
 	fecha_emision=forms.DateField(widget=forms.TextInput(attrs=
                                 {
