@@ -2,21 +2,31 @@
 <html>
 <head>
 	<title>Prueba Pasajes</title>
-	<!-- Latest compiled and minified CSS -->
+	
+	<!-- Css de Bootstrap -Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<!-- jQuery library -->
+
+	<!--CSS de datatables-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	
+	<!-- Importo jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
-	<!--Importo jquery para utilizar "datepicker" funcion de calendario-->
-	 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!--Importo script para usar datatables-->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<!--Importo script para utilizar "datepicker" funcion de calendario-->
   	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+  	 <!-- Script y CSS de select2 -->
   	 {{ form.media.css }}
   	 {{ form.media.js }}
 
   	
-  	<!--Agrego la funcion datepicker a todos los elementos con la clase 'datepicker'-->
+  	
 	<script>
+
+	  //Agrego la funcion datepicker(calendario) a todos los elementos con la clase 'datepicker'-->
 	  $( function(){
 	    $( ".datepicker" ).datepicker({
 	    	dayNamesMin: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
@@ -24,7 +34,27 @@
 	    	nextText:'>'
 	    });
 	  });
+
+
+	  //Agrego funcion que carga los datatables
+	  $(document).ready(function() {
+	    $('.datatable').DataTable({
+	    	//Indico que la tabla se ordena de forma descendente tomando como referencia la columna 0(en este caso el "id")
+	    	order: [[0,'desc']],
+	        dom: 'Bfrtip',
+	        buttons: [
+	            {
+	                extend: 'pdfHtml5',
+	                orientation: 'landscape',
+	                pageSize: 'LEGAL',
+	                
+	            }
+	        ]
+	    } );
+	} );
+
   	</script>
+  	
 
 	 <!--Estilo para datepicker-->
 	 <style>
@@ -94,7 +124,7 @@
 
 	{% block contenido %}{% endblock %}
 
-	<!-- Latest compiled JavaScript -->
+	<!-- Javascript de bootstrap Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 </body>

@@ -5,15 +5,18 @@
 <a href="{% url 'altaEmpresa' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nueva empresa</a>
 <br><br>
 	{% if empresas %}
-	<table class="table table-hover">
-		<tr>
-			<th>Id empresa</th>
-			<th>Nombre</th>
-			<th>Localidad</th>
-			<th>Cuit</th>
-			<th>Acciones</th>
+	<table class="datatable display" style="width:100%">
+		<thead>
+			<tr>
+				<th>Id empresa</th>
+				<th>Nombre</th>
+				<th>Localidad</th>
+				<th>Cuit</th>
+				<th>Acciones</th>
 
-		</tr>
+			</tr>
+		</thead>
+		<tbody>
 	    {% for empresa in empresas %}
 	    	<tr>
 	        	<td>{{ empresa.id }}</td>
@@ -26,6 +29,17 @@
 	        	</td>
 	    	</tr>
 	    {% endfor %}
+	    </tbody>
+	    <tfoot>
+			<tr>
+				<th>Id empresa</th>
+				<th>Nombre</th>
+				<th>Localidad</th>
+				<th>Cuit</th>
+				<th>Acciones</th>
+
+			</tr>
+		</tfoot>
 	</table>
 {% else %}
     <p>No hay empresas a mostrar</p>

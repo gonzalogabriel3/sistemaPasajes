@@ -5,19 +5,20 @@
 <a href="{% url 'altaPasaje' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
 <br><br>
 	{% if pasajes %}
-	<table class="table table-hover">
-		<tr>
-			<th>Id pasaje</th>
-			<th>Agente</th>
-			<th>Dni</th>
-			<th>Empresa</th>
-			<th>Fecha de emision</th>
-			<th>Origen</th>
-			<th>Destino</th>
-			<th>Acciones</th>
-
-
-		</tr>
+	<table class="datatable display" style="width:100%">
+		<thead>
+			<tr>
+				<th>Id pasaje</th>
+				<th>Agente</th>
+				<th>Dni</th>
+				<th>Empresa</th>
+				<th>Fecha de emision</th>
+				<th>Origen</th>
+				<th>Destino</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
 	    {% for pasaje in pasajes %}
 	    	<tr>
 	        	<td>{{ pasaje.id }}</td>
@@ -35,6 +36,19 @@
 	        	
 	    	</tr>
 	    {% endfor %}
+	    </tbody>
+	    <tfoot>
+			<tr>
+				<th>Id pasaje</th>
+				<th>Agente</th>
+				<th>Dni</th>
+				<th>Empresa</th>
+				<th>Fecha de emision</th>
+				<th>Origen</th>
+				<th>Destino</th>
+				<th>Acciones</th>
+			</tr>
+		</tfoot>
 	</table>
 {% else %}
     <p>No hay pasajes a mostrar</p>
