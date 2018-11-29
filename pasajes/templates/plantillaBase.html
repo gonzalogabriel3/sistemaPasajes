@@ -17,12 +17,11 @@
 
 	<!--Importo script para utilizar "datepicker" funcion de calendario-->
   	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+  	
   	 <!-- Script y CSS de select2 -->
   	 {{ form.media.css }}
   	 {{ form.media.js }}
 
-  	
   	
 	<script>
 
@@ -43,12 +42,7 @@
 	    	order: [[0,'desc']],
 	        dom: 'Bfrtip',
 	        buttons: [
-	            {
-	                extend: 'pdfHtml5',
-	                orientation: 'landscape',
-	                pageSize: 'LEGAL',
-	                
-	            }
+	            'pdf'
 	        ]
 	    } );
 	} );

@@ -5,9 +5,55 @@ from django.shortcuts import redirect
 from .models import *
 from .forms import *
 import datetime
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from jinja2 import Environment, FileSystemLoader
 # Create your views here
 
 #################################INDEX'S#################################################
+
+def generarPDF(request):
+	#Indico el tipo de contenido
+	response = HttpResponse(content_type='application/pdf')
+	#Indico el nombre del archivo pdf generado
+	response['Content-Disposition'] = 'inline; filename="mypdf.pdf"'
+
+	buffer = BytesIO()
+	p = canvas.Canvas(buffer)
+
+#ESCRIBIENDO EN EL PDF
+	#Seteo el estilo de la fuente
+	p.setFont("Times-Roman",18)
+	#Escribo el titulo en esas coordenadas(x,y)
+	p.drawString(250, 800, 'Reporte')
+	#Agrego una linea debajo del titulo
+	p.line(50,750,560,750)
+
+
+
+	
+#FIN DE ESCRITURA EN EL PDF
+	
+	p.showPage()
+	p.save()
+	
+	pdf = buffer.getvalue()
+	buffer.close()
+	
+	response.write(pdf)
+
+	return response
+
+
+def generarPDF2(request):
+
+	env=Environment(loader=FileSystemLoader("/"))
+	template=env.get_template("indexAgente.html")
+
+	html=template.render()
+	print(html)
+
+	return
 
 def index(request):
 	return render(request, 'index.html')

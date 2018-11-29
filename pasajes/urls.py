@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+    path('pdf', views.generarPDF, name='pdf'),
     path('', views.index, name='index'),
     path('agente', views.indexAgenteView, name='agente'),
     path('localidad', views.indexLocalidadView, name='localidad'),
