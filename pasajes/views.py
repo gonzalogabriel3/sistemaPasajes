@@ -22,14 +22,67 @@ def generarPDF(request):
 	p = canvas.Canvas(buffer)
 
 #ESCRIBIENDO EN EL PDF
+	
+	#CABECERA
+	
 	#Seteo el estilo de la fuente
 	p.setFont("Times-Roman",18)
 	#Escribo el titulo en esas coordenadas(x,y)
-	p.drawString(250, 800, 'Reporte')
+	p.drawString(250, 800, 'Reporte Agentes')
 	#Agrego una linea debajo del titulo
 	p.line(50,750,560,750)
+	
+	#FIN DE CABECERA
+
+	agentes=Agente.objects.all().order_by('-id')
 
 
+	#Indico las coordenadas de inicio para escritura de los objetos del modelo
+	texto_coordenada_x=50
+	texto_coordenada_y=700
+
+	p.setFont("Times-Roman",12)
+	#Cabecera de tabla
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Id")
+	texto_coordenada_x+=50
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Nombre")
+	texto_coordenada_x+=70
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Apellido")
+	texto_coordenada_x+=70
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Documento")
+	texto_coordenada_x+=70
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Fecha nacimiento")
+	texto_coordenada_x+=100
+	p.drawString(texto_coordenada_x,texto_coordenada_y,"Localidad")
+	texto_coordenada_x+=70
+	#Fin de cabecera
+
+	texto_coordenada_x=50
+	texto_coordenada_y=670
+
+	rectangulo_coordenada_y=668
+
+	p.setFont("Times-Bold",12)
+	for agente in agentes:
+		
+		texto_coordenada_x=50
+		rectangulo_coordenada_x=48
+		p.rect(rectangulo_coordenada_x,rectangulo_coordenada_y,450,13)
+		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.id))
+		texto_coordenada_x+=50
+		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.nombre)
+		texto_coordenada_x+=70
+		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.apellido)
+		texto_coordenada_x+=70
+		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.documento))
+		texto_coordenada_x+=70
+		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.fecha_nacimiento))
+		texto_coordenada_x+=100
+		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.id_localidad.nombre)
+
+		texto_coordenada_y-=20
+		rectangulo_coordenada_y-=20
+	
 
 	
 #FIN DE ESCRITURA EN EL PDF
