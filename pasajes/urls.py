@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
 
+
+    path('pdf2', views.generarPDF2, name='pdf2'),
     path('pdf', views.generarPDF, name='pdf'),
     path('', views.index, name='index'),
     path('agente', views.indexAgenteView, name='agente'),

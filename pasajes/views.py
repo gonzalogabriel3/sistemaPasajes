@@ -4,10 +4,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
-import datetime
+import datetime, time
 from io import BytesIO
 from reportlab.pdfgen import canvas
-from jinja2 import Environment, FileSystemLoader
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+
 # Create your views here
 
 #################################INDEX'S#################################################
@@ -24,11 +27,13 @@ def generarPDF(request):
 #ESCRIBIENDO EN EL PDF
 	
 	#CABECERA
+	fecha_reporte=str(time.strftime("%d/%m/%y"))
 	
 	#Seteo el estilo de la fuente
 	p.setFont("Times-Roman",18)
 	#Escribo el titulo en esas coordenadas(x,y)
 	p.drawString(250, 800, 'Reporte Agentes')
+	p.drawString(440, 800, fecha_reporte)
 	#Agrego una linea debajo del titulo
 	p.line(50,750,560,750)
 	
@@ -100,13 +105,20 @@ def generarPDF(request):
 
 def generarPDF2(request):
 
-	env=Environment(loader=FileSystemLoader("/"))
-	template=env.get_template("indexAgente.html")
+	agentes=Agente.objects.all().order_by('-id')
+	html_string = render_to_string('indexAgente.html', {'agentes': agentes})
+	html = HTML(string=html_string)
+	result = html.write_pdf()
+	response = HttpResponse(content_type='application/pdf;')
+	response['Content-Disposition'] = 'inline; filename=list_people.pdf'
+	response['Content-Transfer-Encoding'] = 'binary'
+	with tempfile.NamedTemporaryFile(delete=True) as output:
+		output.write(result)
+		output.flush()
+		output = open(output.name, 'rb')
+		response.write(output.read())
 
-	html=template.render()
-	print(html)
-
-	return
+	return response
 
 def index(request):
 	return render(request, 'index.html')
