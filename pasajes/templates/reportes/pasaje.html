@@ -1,0 +1,36 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+<center>
+	
+	<h2 style="color:red;">Reporte pasaje</h2>
+
+</center>
+	<br><br>
+	
+	<table>
+		<table class="table table-striped" style="width:100%">
+		<thead>
+			<tr>
+				<th><b>Id pasaje</b></th>
+				<th><b>Agente</b></th>
+				<th><b>Dni</b></th>
+				<th><b>Empresa</b></th>
+				<th><b>Fecha de emision</b></th>
+				<th><b>Origen</b></th>
+				<th><b>Destino</b></th>
+			</tr>
+		</thead>
+		<tbody>
+			<td>{{ pasaje.id }}</td>
+	        <td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
+	        <td>{{ pasaje.id_agente.documento }}</td>
+	        <td>{{ pasaje.id_empresa.nombre }}</td>
+	        <td>{{ pasaje.fecha_emision }}</td>
+	        <td>{{ pasaje.origen }}</td>
+			<td>{{ pasaje.destino }}</td>
+		</tbody>
+	</table>
+
+
+{% endblock %}

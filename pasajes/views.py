@@ -120,6 +120,27 @@ def generarPDF2(request):
 
 	return response
 
+def reportePasaje(request,idPasaje):
+	pasaje=Pasaje.objects.get(id=idPasaje)
+	#Renderizo la vista que sera devuelta
+	html_string = render_to_string('reportes/pasaje.html', {'pasaje': pasaje})
+	html = HTML(string=html_string)
+	result = html.write_pdf()
+	#Indico el tipo de contenido en la respuesta,en este caso un PDF
+	response = HttpResponse(content_type='application/pdf;')
+	#Indico el nombre del nuevo pdf
+	response['Content-Disposition'] = 'inline; filename=Reporte_Pasaje.pdf'
+	response['Content-Transfer-Encoding'] = 'binary'
+
+	#Creo un archivo temporal que va a contener el PDF generado
+	with tempfile.NamedTemporaryFile(delete=True) as output:
+		output.write(result)
+		output.flush()
+		output = open(output.name, 'rb')
+		response.write(output.read())
+
+	return response
+
 def index(request):
 	return render(request, 'index.html')
 
@@ -193,8 +214,8 @@ def altaAgente(request):
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioAgente()
-		titulo="Agregar nuevo agente"
 		
+	titulo="Agregar nuevo agente"	
 	return render(request,'formularios/agente.html',{'form':form,'titulo':titulo})
 
 def bajaAgente(request,idAgente):
@@ -216,7 +237,7 @@ def modificacionAgente(request,idAgente):
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un agente
 	if(request.method == 'GET'):
 		form=formularioAgente(instance=agente)
-		titulo="Modificar agente"
+		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el agente	
 	elif(request.method == "POST"):
 		form=formularioAgente(request.POST, instance = agente)
@@ -224,7 +245,7 @@ def modificacionAgente(request,idAgente):
 			form.save()
 			return redirect('agente')
 
-	
+	titulo="Modificar agente"
 	return render(request,'formularios/agente.html',{'form':form,'agente':agente,'titulo':titulo})
 
 #********FIN ABM AGENTE***********#
@@ -246,8 +267,8 @@ def altaLocalidad(request):
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioLocalidad()
-		titulo="Agregar nueva localidad"
 		
+	titulo="Agregar nueva localidad"	
 	return render(request,'formularios/localidad.html',{'form':form,'titulo':titulo})
 
 
@@ -271,7 +292,7 @@ def modificacionLocalidad(request,idLocalidad):
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Localidad
 	if(request.method == 'GET'):
 		form=formularioLocalidad(instance=localidad)
-		titulo="Modificar localidad"
+		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Localidad	
 	elif(request.method == "POST"):
 		form=formularioLocalidad(request.POST, instance = localidad)
@@ -279,7 +300,7 @@ def modificacionLocalidad(request,idLocalidad):
 			form.save()
 			return redirect('localidad')
 
-	
+	titulo="Modificar localidad"
 	return render(request,'formularios/localidad.html',{'form':form,'localidad':localidad,'titulo':titulo})
 
 
@@ -301,8 +322,9 @@ def altaFamiliar(request):
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioFamiliar()
-		titulo="Agregar nuevo familiar"
 		
+	
+	titulo="Agregar nuevo familiar"	
 	return render(request,'formularios/familiar.html',{'form':form,'titulo':titulo})
 
 def bajaFamiliar(request,idFamiliar):
@@ -324,7 +346,7 @@ def modificacionFamiliar(request,idFamiliar):
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Familiar
 	if(request.method == 'GET'):
 		form=formularioFamiliar(instance=familiar)
-		titulo="Modificar familiar"
+		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Familiar	
 	elif(request.method == "POST"):
 		form=formularioFamiliar(request.POST, instance = familiar)
@@ -332,7 +354,7 @@ def modificacionFamiliar(request,idFamiliar):
 			form.save()
 			return redirect('familiar')
 
-	
+	titulo="Modificar familiar"
 	return render(request,'formularios/familiar.html',{'form':form,'familiar':familiar,'titulo':titulo})
 
 
@@ -355,8 +377,8 @@ def altaEmpresa(request):
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioEmpresa()
-		titulo="Agregar nueva empresa"
 		
+	titulo="Agregar nueva empresa"	
 	return render(request,'formularios/empresa.html',{'form':form,'titulo':titulo})
 
 
@@ -379,7 +401,7 @@ def modificacionEmpresa(request,idEmpresa):
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Empresa
 	if(request.method == 'GET'):
 		form=formularioEmpresa(instance=empresa)
-		titulo="Modificar empresa"
+		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Empresa	
 	elif(request.method == "POST"):
 		form=formularioEmpresa(request.POST, instance = empresa)
@@ -387,7 +409,7 @@ def modificacionEmpresa(request,idEmpresa):
 			form.save()
 			return redirect('empresa')
 
-	
+	titulo="Modificar empresa"
 	return render(request,'formularios/empresa.html',{'form':form,'empresa':empresa,'titulo':titulo})
 
 
@@ -412,8 +434,8 @@ def altaPasaje(request):
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioPasaje()
-		titulo="Agregar nuevo pasaje"
 		
+	titulo="Agregar nuevo pasaje"	
 	return render(request,'formularios/pasaje.html',{'form':form,'titulo':titulo})
 
 def bajaPasaje(request,idPasaje):
@@ -435,7 +457,7 @@ def modificacionPasaje(request,idPasaje):
 	#Si se ingresa por GET creo el formulario y paso como instancia los datos de un Pasaje
 	if(request.method == 'GET'):
 		form=formularioPasaje(instance=pasaje)
-		titulo="Modificar Pasaje"
+		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Pasaje	
 	elif(request.method == "POST"):
 		form=formularioPasaje(request.POST, instance = pasaje)
@@ -443,7 +465,7 @@ def modificacionPasaje(request,idPasaje):
 			form.save()
 			return redirect('pasaje')
 
-	
+	titulo="Modificar Pasaje"
 	return render(request,'formularios/pasaje.html',{'form':form,'pasaje':pasaje,'titulo':titulo})
 
 

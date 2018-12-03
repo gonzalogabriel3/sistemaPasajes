@@ -7,6 +7,7 @@ urlpatterns = [
 
     path('pdf2', views.generarPDF2, name='pdf2'),
     path('pdf', views.generarPDF, name='pdf'),
+    path('reportePasaje/<int:idPasaje>/', views.reportePasaje, name='reportePasaje'),
     path('', views.index, name='index'),
     path('agente', views.indexAgenteView, name='agente'),
     path('localidad', views.indexLocalidadView, name='localidad'),

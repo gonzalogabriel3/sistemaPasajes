@@ -29,8 +29,9 @@
 	        	<td>{{ pasaje.origen }}</td>
 				<td>{{ pasaje.destino }}</td>
 				<td>
-	        		<a href="{% url 'modificacionPasaje' pasaje.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>Editar</a>
-	        		<a href="{% url 'bajaPasaje' pasaje.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        		<a href="{% url 'modificacionPasaje' pasaje.id %}" class="btn btn-warning" style="display: inline-block;"><span class="glyphicon glyphicon-edit"></span>Editar</a>
+	        		<a href="{% url 'bajaPasaje' pasaje.id %}" class="btn btn-danger" style="display: inline-block;"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        		<a href="{% url 'reportePasaje' pasaje.id %}" class="btn btn-info" style="display: inline-block;"><span class="glyphicon glyphicon glyphicon-file"></span> Generar reporte</a>
 	        	</td>
 	    	</tr>
 	        	

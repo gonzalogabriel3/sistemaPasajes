@@ -17,7 +17,7 @@ class formularioAgente(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del agente",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+	fecha_nacimiento=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -55,7 +55,7 @@ class formularioFamiliar(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del familiar",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+	fecha_nacimiento=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -89,7 +89,7 @@ class formularioPasaje(forms.ModelForm):
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
 
-	fecha_emision=forms.DateField(widget=forms.TextInput(attrs=
+	fecha_emision=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))

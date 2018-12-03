@@ -29,8 +29,11 @@
 	  $( function(){
 	    $( ".datepicker" ).datepicker({
 	    	dayNamesMin: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+	    	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 	    	prevText:'<',
-	    	nextText:'>'
+	    	nextText:'>',
+	    	dateFormat: 'dd/mm/yy'
+	    	
 	    });
 	  });
 
@@ -41,9 +44,7 @@
 	    	//Indico que la tabla se ordena de forma descendente tomando como referencia la columna 0(en este caso el "id")
 	    	order: [[0,'desc']],
 	        dom: 'Bfrtip',
-	        buttons: [
-	            'pdf'
-	        ]
+	        
 	    } );
 	} );
 
