@@ -426,6 +426,7 @@ def altaPasaje(request):
 		#Valido el formulario
 		if(form.is_valid()):
 				pasaje=form.save(commit=False)
+				pasaje.fecha_emision=datetime.datetime.now()
 				
 				#(Si se desea que la fecha de emision sea automatica)pasaje.fecha_emision=datetime.datetime.now()
 				pasaje.save()
@@ -462,6 +463,7 @@ def modificacionPasaje(request,idPasaje):
 	elif(request.method == "POST"):
 		form=formularioPasaje(request.POST, instance = pasaje)
 		if(form.is_valid()):
+			pasaje.fecha_emision=datetime.datetime.now()
 			form.save()
 			return redirect('pasaje')
 

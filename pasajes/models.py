@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Localidad(models.Model):
@@ -45,7 +46,8 @@ class Pasaje(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)
 	id_agente=models.ForeignKey(Agente, on_delete=models.CASCADE,verbose_name="Agente")
 	id_empresa=models.ForeignKey(Empresa, on_delete=models.CASCADE,verbose_name="Empresa")
-	fecha_emision=models.DateField()
+	fecha_viaje=models.DateField()
+	fecha_emision=models.DateTimeField(default=datetime.datetime.now())
 	origen=models.CharField(max_length=200)
 	destino=models.CharField(max_length=200)
 

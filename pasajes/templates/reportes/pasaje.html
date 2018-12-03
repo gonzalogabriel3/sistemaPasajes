@@ -1,5 +1,6 @@
 {% extends "plantillaBase.html" %}
 
+
 {% block contenido %}
 <center>
 	
@@ -16,6 +17,7 @@
 				<th><b>Agente</b></th>
 				<th><b>Dni</b></th>
 				<th><b>Empresa</b></th>
+				<th><b>Fecha de viaje</b></th>
 				<th><b>Fecha de emision</b></th>
 				<th><b>Origen</b></th>
 				<th><b>Destino</b></th>
@@ -26,6 +28,7 @@
 	        <td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
 	        <td>{{ pasaje.id_agente.documento }}</td>
 	        <td>{{ pasaje.id_empresa.nombre }}</td>
+	        <td>{{ pasaje.fecha_viaje }}</td>
 	        <td>{{ pasaje.fecha_emision }}</td>
 	        <td>{{ pasaje.origen }}</td>
 			<td>{{ pasaje.destino }}</td>

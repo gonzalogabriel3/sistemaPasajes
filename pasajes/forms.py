@@ -89,7 +89,7 @@ class formularioPasaje(forms.ModelForm):
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
 
-	fecha_emision=forms.DateField(widget=forms.DateInput(attrs=
+	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -104,5 +104,5 @@ class formularioPasaje(forms.ModelForm):
 
 	class Meta:
 		model=Pasaje
-		exclude=['id']
+		exclude=['id','fecha_emision']
 		#(Si se desea que la fecha sea automatica)exclude=['id','fecha_emision']
