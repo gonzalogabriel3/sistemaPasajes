@@ -1,6 +1,5 @@
 from django import forms
 from .models import *
-#from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import *
 
 class formularioAgente(forms.ModelForm):

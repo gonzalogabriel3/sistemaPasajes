@@ -2,7 +2,9 @@
 
 {% block contenido %}
 <br>
-<a href="{% url 'altaLocalidad' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nueva localidad</a>
+<a href="{% url 'altaLocalidad' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nueva localidad</a>
+<a href="{% url 'index' %}"  class="btn btn-info" style="display: inline-block;margin-left: 340px">Menu principal</a>
+
 <br><br>
 {% if localidades %}
 	<table class="datatable display" style="width:100%">
@@ -40,8 +42,5 @@
 {% else %}
     <p>No hay localidades a mostrar</p>
 {% endif %}
-
-		<br><br>
-    	<center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
 
 {% endblock %}

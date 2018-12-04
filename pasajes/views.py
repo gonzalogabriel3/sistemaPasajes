@@ -11,136 +11,10 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
 
+
 # Create your views here
 
 #################################INDEX'S#################################################
-
-def generarPDF(request):
-	#Indico el tipo de contenido
-	response = HttpResponse(content_type='application/pdf')
-	#Indico el nombre del archivo pdf generado
-	response['Content-Disposition'] = 'inline; filename="mypdf.pdf"'
-
-	buffer = BytesIO()
-	p = canvas.Canvas(buffer)
-
-#ESCRIBIENDO EN EL PDF
-	
-	#CABECERA
-	fecha_reporte=str(time.strftime("%d/%m/%y"))
-	
-	#Seteo el estilo de la fuente
-	p.setFont("Times-Roman",18)
-	#Escribo el titulo en esas coordenadas(x,y)
-	p.drawString(250, 800, 'Reporte Agentes')
-	p.drawString(440, 800, fecha_reporte)
-	#Agrego una linea debajo del titulo
-	p.line(50,750,560,750)
-	
-	#FIN DE CABECERA
-
-	agentes=Agente.objects.all().order_by('-id')
-
-
-	#Indico las coordenadas de inicio para escritura de los objetos del modelo
-	texto_coordenada_x=50
-	texto_coordenada_y=700
-
-	p.setFont("Times-Roman",12)
-	#Cabecera de tabla
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Id")
-	texto_coordenada_x+=50
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Nombre")
-	texto_coordenada_x+=70
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Apellido")
-	texto_coordenada_x+=70
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Documento")
-	texto_coordenada_x+=70
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Fecha nacimiento")
-	texto_coordenada_x+=100
-	p.drawString(texto_coordenada_x,texto_coordenada_y,"Localidad")
-	texto_coordenada_x+=70
-	#Fin de cabecera
-
-	texto_coordenada_x=50
-	texto_coordenada_y=670
-
-	rectangulo_coordenada_y=668
-
-	p.setFont("Times-Bold",12)
-	for agente in agentes:
-		
-		texto_coordenada_x=50
-		rectangulo_coordenada_x=48
-		p.rect(rectangulo_coordenada_x,rectangulo_coordenada_y,450,13)
-		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.id))
-		texto_coordenada_x+=50
-		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.nombre)
-		texto_coordenada_x+=70
-		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.apellido)
-		texto_coordenada_x+=70
-		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.documento))
-		texto_coordenada_x+=70
-		p.drawString(texto_coordenada_x,texto_coordenada_y,str(agente.fecha_nacimiento))
-		texto_coordenada_x+=100
-		p.drawString(texto_coordenada_x,texto_coordenada_y,agente.id_localidad.nombre)
-
-		texto_coordenada_y-=20
-		rectangulo_coordenada_y-=20
-	
-
-	
-#FIN DE ESCRITURA EN EL PDF
-	
-	p.showPage()
-	p.save()
-	
-	pdf = buffer.getvalue()
-	buffer.close()
-	
-	response.write(pdf)
-
-	return response
-
-
-def generarPDF2(request):
-
-	agentes=Agente.objects.all().order_by('-id')
-	html_string = render_to_string('indexAgente.html', {'agentes': agentes})
-	html = HTML(string=html_string)
-	result = html.write_pdf()
-	response = HttpResponse(content_type='application/pdf;')
-	response['Content-Disposition'] = 'inline; filename=list_people.pdf'
-	response['Content-Transfer-Encoding'] = 'binary'
-	with tempfile.NamedTemporaryFile(delete=True) as output:
-		output.write(result)
-		output.flush()
-		output = open(output.name, 'rb')
-		response.write(output.read())
-
-	return response
-
-def reportePasaje(request,idPasaje):
-	pasaje=Pasaje.objects.get(id=idPasaje)
-	#Renderizo la vista que sera devuelta
-	html_string = render_to_string('reportes/pasaje.html', {'pasaje': pasaje})
-	html = HTML(string=html_string)
-	result = html.write_pdf()
-	#Indico el tipo de contenido en la respuesta,en este caso un PDF
-	response = HttpResponse(content_type='application/pdf;')
-	#Indico el nombre del nuevo pdf
-	response['Content-Disposition'] = 'inline; filename=Reporte_Pasaje.pdf'
-	response['Content-Transfer-Encoding'] = 'binary'
-
-	#Creo un archivo temporal que va a contener el PDF generado
-	with tempfile.NamedTemporaryFile(delete=True) as output:
-		output.write(result)
-		output.flush()
-		output = open(output.name, 'rb')
-		response.write(output.read())
-
-	return response
-
 def index(request):
 	return render(request, 'index.html')
 
@@ -426,7 +300,9 @@ def altaPasaje(request):
 		#Valido el formulario
 		if(form.is_valid()):
 				pasaje=form.save(commit=False)
-				pasaje.fecha_emision=datetime.datetime.now()
+				#Digo que la fecha de emision es la fecha/hora actual,le resto 3 horas con timedelta porque datetime.now() guarda la hora
+				#con 3 horas de adelanto
+				pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
 				
 				#(Si se desea que la fecha de emision sea automatica)pasaje.fecha_emision=datetime.datetime.now()
 				pasaje.save()
@@ -447,7 +323,7 @@ def bajaPasaje(request,idPasaje):
 		pasaje.delete()
 		return redirect('pasaje')
 
-	texto="el pasaje '"+str(pasaje.id)+"',emitido el dia "+str(pasaje.fecha_emision)+"?"
+	texto="el pasaje '"+str(pasaje.id)+"',emitido el dia "+str(pasaje.fecha_emision.strftime('%Y-%m-%d %H:%M'))+"?"
 	nombreUrl="pasaje"
 
 	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
@@ -463,7 +339,7 @@ def modificacionPasaje(request,idPasaje):
 	elif(request.method == "POST"):
 		form=formularioPasaje(request.POST, instance = pasaje)
 		if(form.is_valid()):
-			pasaje.fecha_emision=datetime.datetime.now()
+			pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
 			form.save()
 			return redirect('pasaje')
 
@@ -474,3 +350,26 @@ def modificacionPasaje(request,idPasaje):
 #********FIN ABM PASAJE***********#
 
 
+#********REPORTES********************#
+def reportePasaje(request,idPasaje):
+	pasaje=Pasaje.objects.get(id=idPasaje)
+	#Renderizo la vista que sera devuelta
+	html_string = render_to_string('reportes/pasaje.html', {'pasaje': pasaje})
+	html = HTML(string=html_string)
+	result = html.write_pdf()
+	#Indico el tipo de contenido en la respuesta,en este caso un PDF
+	response = HttpResponse(content_type='application/pdf;')
+	#Indico el nombre del nuevo pdf
+	response['Content-Disposition'] = 'inline; filename=Reporte_Pasaje.pdf'
+	response['Content-Transfer-Encoding'] = 'binary'
+
+	#Creo un archivo temporal que va a contener el PDF generado
+	with tempfile.NamedTemporaryFile(delete=True) as output:
+		output.write(result)
+		output.flush()
+		output = open(output.name, 'rb')
+		response.write(output.read())
+
+	return response
+
+#*************FIN REPORTES*************#
