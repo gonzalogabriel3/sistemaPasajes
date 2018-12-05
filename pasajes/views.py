@@ -209,7 +209,7 @@ def bajaFamiliar(request,idFamiliar):
 		familiar.delete()
 		return redirect('familiar')
 
-	texto="el familiar '"+familiar.nombre+" "+familiar.apellido+"',con id "+str(familiar.id)+"?"
+	texto="a el familiar '"+familiar.nombre+" "+familiar.apellido+"',con id "+str(familiar.id)+"?"
 	nombreUrl="familiar"
 
 	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})
@@ -353,6 +353,10 @@ def modificacionPasaje(request,idPasaje):
 #********REPORTES********************#
 def reportePasaje(request,idPasaje):
 	pasaje=Pasaje.objects.get(id=idPasaje)
+
+	#Obtengo la fecha actual para asignarla al nombre del pdf
+	fecha=datetime.datetime.now()
+	fecha=fecha.strftime("%d/%m/%Y")
 	#Renderizo la vista que sera devuelta
 	html_string = render_to_string('reportes/pasaje.html', {'pasaje': pasaje})
 	html = HTML(string=html_string)
@@ -360,7 +364,7 @@ def reportePasaje(request,idPasaje):
 	#Indico el tipo de contenido en la respuesta,en este caso un PDF
 	response = HttpResponse(content_type='application/pdf;')
 	#Indico el nombre del nuevo pdf
-	response['Content-Disposition'] = 'inline; filename=Reporte_Pasaje.pdf'
+	response['Content-Disposition'] = 'inline; filename=Reporte_Pasaje_Nro'+str(pasaje.id)+'_'+str(fecha)+'.pdf'
 	response['Content-Transfer-Encoding'] = 'binary'
 
 	#Creo un archivo temporal que va a contener el PDF generado

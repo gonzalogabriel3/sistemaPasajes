@@ -39,14 +39,22 @@
 
 
 	  //Agrego funcion que carga los datatables
-	  $(document).ready(function() {
-	    $('.datatable').DataTable({
-	    	//Indico que la tabla se ordena de forma descendente tomando como referencia la columna 0(en este caso el "id")
-	    	order: [[0,'desc']],
-	        dom: 'Bfrtip',
-	        
-	    } );
-	} );
+	  $(document).ready(function(){
+		    $('.datatable').DataTable({
+		    	//Indico que la tabla se ordena de forma descendente tomando como referencia la columna 0(en este caso el "id")
+		    	order: [[0,'desc']],
+		        dom: 'Bfrtip',
+		        language:{
+		        	search:"<span class='glyphicon glyphicon-search'></span> Buscar",
+		        	info:"<i>Mostrando _START_-_END_ de _TOTAL_ resultados</i>",
+		        	paginate:{
+		        		previous:"Anterior",
+		        		next:"Siguiente"
+		        	}
+		        }
+		        
+		    });
+	});
 
   	</script>
   	
