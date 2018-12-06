@@ -1,7 +1,9 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
-<img src="{{STATIC_URL}}/images/logoAVP.png"  height="42" width="42"> 
+<!-- cargar una imagen 
+	<img src="static/logoAVP.png"  height="42" width="42">
+-->	 
 <br>
 <a href="{% url 'altaPasaje' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
 <a href="{% url 'index' %}"  class="btn btn-info" style="display: inline-block;margin-left: 340px">Menu principal</a>

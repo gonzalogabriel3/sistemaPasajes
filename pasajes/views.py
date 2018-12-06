@@ -359,7 +359,8 @@ def reportePasaje(request,idPasaje):
 	fecha=fecha.strftime("%d/%m/%Y")
 	#Renderizo la vista que sera devuelta
 	html_string = render_to_string('reportes/pasaje.html', {'pasaje': pasaje})
-	html = HTML(string=html_string)
+	#Agrego el 'base_url' para poder cargar imagenes en el pdf
+	html = HTML(string=html_string,base_url=request.build_absolute_uri())
 	result = html.write_pdf()
 	#Indico el tipo de contenido en la respuesta,en este caso un PDF
 	response = HttpResponse(content_type='application/pdf;')
