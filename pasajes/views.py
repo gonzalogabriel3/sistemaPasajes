@@ -10,12 +10,14 @@ from reportlab.pdfgen import canvas
 from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
+from django.contrib import messages
 
 
 # Create your views here
 
 #################################INDEX'S#################################################
 def index(request):
+	
 	return render(request, 'index.html')
 
 
@@ -33,7 +35,7 @@ def indexLocalidadView(request):
 	localidades=Localidad.objects.all().order_by('-id')
 	
 	context={
-		'localidades':localidades,
+		'localidades':localidades
 	}
 	
 	return render(request, 'indexLocalidad.html', context)
@@ -77,7 +79,7 @@ def altaAgente(request):
 
 	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
 	if(request.method == 'POST'):
-		
+		messages.success(request,"Se ha creado un nuevo agente")
 		form=formularioAgente(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
@@ -97,6 +99,7 @@ def bajaAgente(request,idAgente):
 	agente=Agente.objects.get(id=idAgente)
 
 	if(request.method=="POST"):
+		messages.success(request,"Se ha eliminado al agente '"+agente.apellido+" "+agente.nombre+"' con id "+str(agente.id))
 		agente.delete()
 		return redirect('agente')
 
@@ -114,6 +117,7 @@ def modificacionAgente(request,idAgente):
 		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el agente	
 	elif(request.method == "POST"):
+		messages.success(request,"Se ha modificado al agente '"+agente.apellido+" "+agente.nombre+"' con id "+str(agente.id))
 		form=formularioAgente(request.POST, instance = agente)
 		if(form.is_valid()):
 			form.save()
@@ -130,7 +134,7 @@ def altaLocalidad(request):
 
 	#Recibo el request,si es un request de tipo POST lo valido y guardo el nuevo agente
 	if(request.method == 'POST'):
-		
+		messages.success(request,"Se ha creado nueva localidad")
 		form=formularioLocalidad(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
@@ -152,6 +156,7 @@ def bajaLocalidad(request,idLocalidad):
 	localidad=Localidad.objects.get(id=idLocalidad)
 
 	if(request.method=="POST"):
+		messages.success(request,"Se ha eliminado la localidad '"+localidad.nombre+ "',con id "+str(localidad.id))
 		localidad.delete()
 		return redirect('localidad')
 
@@ -170,8 +175,10 @@ def modificacionLocalidad(request,idLocalidad):
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Localidad	
 	elif(request.method == "POST"):
 		form=formularioLocalidad(request.POST, instance = localidad)
+		#Agrego un mensaje en caso de que se modifique correctamente
+		messages.success(request,"Se ha modificado la localidad '"+localidad.nombre+ "',con id "+str(localidad.id))
 		if(form.is_valid()):
-			form.save()
+			form.save()		
 			return redirect('localidad')
 
 	titulo="Modificar localidad"
@@ -185,7 +192,7 @@ def modificacionLocalidad(request,idLocalidad):
 def altaFamiliar(request):
 
 	if(request.method == 'POST'):
-		
+		messages.success(request,"Se ha creado un nuevo familiar")
 		form=formularioFamiliar(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
@@ -206,6 +213,7 @@ def bajaFamiliar(request,idFamiliar):
 	familiar=Familiar.objects.get(id=idFamiliar)
 
 	if(request.method=="POST"):
+		messages.success(request,"Se ha eliminado al familiar '"+familiar.apellido+" "+familiar.nombre+"' con id "+str(familiar.id))
 		familiar.delete()
 		return redirect('familiar')
 
@@ -223,6 +231,7 @@ def modificacionFamiliar(request,idFamiliar):
 		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Familiar	
 	elif(request.method == "POST"):
+		messages.success(request,"Se ha modificado al familiar '"+familiar.apellido+" "+familiar.nombre+"' con id "+str(familiar.id))
 		form=formularioFamiliar(request.POST, instance = familiar)
 		if(form.is_valid()):
 			form.save()
@@ -240,7 +249,7 @@ def modificacionFamiliar(request,idFamiliar):
 def altaEmpresa(request):
 
 	if(request.method == 'POST'):
-		
+		messages.success(request,"Se ha creado una nueva empresa")
 		form=formularioEmpresa(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
@@ -261,6 +270,7 @@ def bajaEmpresa(request,idEmpresa):
 	empresa=Empresa.objects.get(id=idEmpresa)
 
 	if(request.method=="POST"):
+		messages.success(request,"Se ha eliminado la empresa '"+empresa.nombre+"' con id "+str(empresa.id))
 		empresa.delete()
 		return redirect('empresa')
 
@@ -278,6 +288,7 @@ def modificacionEmpresa(request,idEmpresa):
 		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Empresa	
 	elif(request.method == "POST"):
+		messages.success(request,"Se ha modificado la empresa '"+empresa.nombre+"' con id "+str(empresa.id))
 		form=formularioEmpresa(request.POST, instance = empresa)
 		if(form.is_valid()):
 			form.save()
@@ -295,7 +306,7 @@ def altaPasaje(request):
 
 	
 	if(request.method == 'POST'):
-		
+		messages.success(request,"Se ha creado un nuevo pasaje")
 		form=formularioPasaje(request.POST)	
 		#Valido el formulario
 		if(form.is_valid()):
@@ -320,6 +331,7 @@ def bajaPasaje(request,idPasaje):
 	pasaje=Pasaje.objects.get(id=idPasaje)
 
 	if(request.method=="POST"):
+		messages.success(request,"Se ha eliminado el pasaje con id '"+str(pasaje.id)+"'")
 		pasaje.delete()
 		return redirect('pasaje')
 
@@ -337,6 +349,7 @@ def modificacionPasaje(request,idPasaje):
 		
 	#Si por el contrario se ingresa por POST valido el formulario y guardo los datos en el Pasaje	
 	elif(request.method == "POST"):
+		messages.success(request,"Se ha modificado el pasaje con id '"+str(pasaje.id)+"'")
 		form=formularioPasaje(request.POST, instance = pasaje)
 		if(form.is_valid()):
 			pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
