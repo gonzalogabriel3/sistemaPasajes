@@ -123,7 +123,24 @@
 
 </head>
 <body class="container">
-
+{% load static %}
+	<nav class="navbar navbar-inverse" style="background-color: #03585a;">
+	  	<div class="container-fluid">
+	     <div class="navbar-header">
+	      <a  class="navbar-brand" href="{% url 'index' %}"><b>INICIO</b></a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li><a href="{% url 'agente' %}">Agentes</a></li>
+	        <li><a href="{% url 'localidad' %}">Localidades</a></li>
+	        <li><a href="{% url 'familiar' %}">Familiares</a></li>
+	        <li><a href="{% url 'empresa' %}">Empresas</a></li>
+	        <li><a href="{% url 'pasaje' %}">Pasajes</a></li>
+	        
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
 
 	{% block contenido %}{% endblock %}
 

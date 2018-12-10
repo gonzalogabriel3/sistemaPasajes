@@ -14,7 +14,6 @@
 	</div>
 {% endif %}
 <a href="{% url 'altaPasaje' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
-<a href="{% url 'index' %}"  class="btn btn-info" style="display: inline-block;margin-left: 340px">Menu principal</a>
 <br><br>
 	{% if pasajes %}
 	<table class="datatable display" style="width:100%">
@@ -24,6 +23,7 @@
 				<th>Agente</th>
 				<th>Dni</th>
 				<th>Empresa</th>
+				<th>Via</th>
 				<th>Fecha de viaje</th>
 				<th>Fecha de emision</th>
 				<th>Origen</th>
@@ -38,6 +38,7 @@
 	        	<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
 	        	<td>{{ pasaje.id_agente.documento }}</td>
 	        	<td>{{ pasaje.id_empresa.nombre }}</td>
+	        	<td>{{ pasaje.via }}</td>
 	        	<td>{{ pasaje.fecha_viaje }}</td>
 	        	<td>{{ pasaje.fecha_emision }}</td>
 	        	<td>{{ pasaje.origen }}</td>
@@ -58,6 +59,7 @@
 				<th>Agente</th>
 				<th>Dni</th>
 				<th>Empresa</th>
+				<th>Via</th>
 				<th>Fecha de viaje</th>
 				<th>Fecha de emision</th>
 				<th>Origen</th>

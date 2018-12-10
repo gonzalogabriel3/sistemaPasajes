@@ -83,10 +83,17 @@ class formularioEmpresa(forms.ModelForm):
 
 
 class formularioPasaje(forms.ModelForm):
+	VIAS = (
+		('Terrestre', 'Terrestre'),
+	    ('Aerea', 'Aerea')
+	    
+	)
 
 	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
+
+	via=forms.ChoiceField(label="Via",choices=VIAS,widget=Select2Widget)
 
 	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
                                 {

@@ -1,13 +1,9 @@
 {% extends "plantillaBase.html" %}
-
+{% load static %}
 {% block contenido %}
-	<center><h2 style="color:#16a795">Inicio</h2>
-	<br>
-	<a href="agente" class="btn btn-primary">Menu agentes</a>
-	<a href="{% url 'localidad' %}" class="btn btn-primary">Menu localidades</a>
-	<a href="familiar" class="btn btn-primary">Menu familiares</a>
-	<a href="empresa" class="btn btn-primary">Menu empresas</a>
-	<a href="pasaje" class="btn btn-primary">Menu pasajes</a>
-	</center>
+	
+		<img src="{% static 'logoAVP1.png' %}" alt="imagenLogo" style="display:inline-block;width:200px;height:90px;float:left;margin-right: 300px"/>
+		<h1 style="color:#16a795" style="display: inline-block;"><i>INICIO</i></h1>
+		
 
 {% endblock %}
