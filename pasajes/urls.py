@@ -5,6 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('reportePasaje/<int:idPasaje>/', views.reportePasaje, name='reportePasaje'),
+    
     path('', views.index, name='index'),
     path('agente', views.indexAgenteView, name='agente'),
     path('localidad', views.indexLocalidadView, name='localidad'),
@@ -18,6 +19,7 @@ urlpatterns = [
     path('altaAgente', views.altaAgente, name='altaAgente'),
     path('modificacionAgente/<int:idAgente>/', views.modificacionAgente, name='modificacionAgente'),
     path('bajaAgente/<int:idAgente>/', views.bajaAgente, name='bajaAgente'),
+    path('agentePasaje',views.agentePasaje, name='agentePasaje'),
 
     #**ABM Localidad**#
     path('altaLocalidad', views.altaLocalidad, name='altaLocalidad'),
