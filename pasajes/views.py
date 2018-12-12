@@ -390,26 +390,29 @@ def reportePasaje(request,idPasaje):
 
 	return response
 
-def agentePasaje(request):
+def agentePasaje(request,idAgente):
+
+	agente=Agente.objects.get(id=idAgente)
 
 	if(request.method == 'POST'):
-		form=formularioPasajeAgente(request.POST)	
+		form=formularioPasajeAgente(request.POST)
+			
 		#Valido el formulario
 		if(form.is_valid()):
-				pasaje=form.save(commit=False)
-				#Digo que la fecha de emision es la fecha/hora actual,le resto 3 horas con timedelta porque datetime.now() guarda la hora
-				#con 3 horas de adelanto
-				pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
-				
-				#(Si se desea que la fecha de emision sea automatica)pasaje.fecha_emision=datetime.datetime.now()
-				pasaje.save()
-				return redirect('pasaje')
+			pasaje=Pasaje()
+			idAgente=form.cleaned_data.get("id_agente")
+			pasaje.id_agente = idAgente
+			
+			pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
+
+			pasaje.save()
+			return redirect('pasaje')
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioPasajeAgente()
 		
 	titulo="Agregar nuevo pasaje"	
-	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo})
+	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
 
 #*************FIN REPORTES*************#

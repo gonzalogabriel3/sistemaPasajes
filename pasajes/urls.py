@@ -19,7 +19,7 @@ urlpatterns = [
     path('altaAgente', views.altaAgente, name='altaAgente'),
     path('modificacionAgente/<int:idAgente>/', views.modificacionAgente, name='modificacionAgente'),
     path('bajaAgente/<int:idAgente>/', views.bajaAgente, name='bajaAgente'),
-    path('agentePasaje',views.agentePasaje, name='agentePasaje'),
+    path('agentePasaje/<int:idAgente>/',views.agentePasaje, name='agentePasaje'),
 
     #**ABM Localidad**#
     path('altaLocalidad', views.altaLocalidad, name='altaLocalidad'),

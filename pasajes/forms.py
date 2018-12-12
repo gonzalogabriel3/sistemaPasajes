@@ -117,7 +117,7 @@ class formularioPasajeAgente(forms.ModelForm):
 	    ('Aerea', 'Aerea')
 	)
 
-	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
+	#id_agente=forms.CharField(label="Agente",initial="nombreAgente",widget=forms.TextInput(attrs={'readonly':'readonly'}))
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
 
@@ -135,7 +135,9 @@ class formularioPasajeAgente(forms.ModelForm):
 	destino =  forms.CharField(max_length=100,label="Destino",
 		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
 
-
 	class Meta:
 		model=Pasaje
-		exclude=['id','fecha_emision']
+		exclude=['id','id_agente','fecha_emision']
+
+
+	

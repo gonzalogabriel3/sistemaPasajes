@@ -3,7 +3,10 @@
 {% block contenido %}
 	<center><h2 style="color:grey">{{titulo}}</h2></center>
 	<br>
-	<form action="" method="POST">{% csrf_token %}
+	<form action="" method="POST" target="_blank">{% csrf_token %}
+		<label><b>Agente:</b></label>
+		<input type="text" placeholder="{{agente.nombre}} {{agente.apellido}}" disabled readonly>
+		<input type="number" name="idAgenteFormulario" hidden value={{agente.id}}>
 		{{form.as_p}}
 		<br>
 		<center>
