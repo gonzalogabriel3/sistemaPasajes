@@ -30,7 +30,7 @@ class Familiar(models.Model):
 	fecha_nacimiento=models.DateField()
 
 	def __str__(self):
-		return self.apellido+"/"+self.nombre
+		return self.apellido+" "+self.nombre
 
 class Empresa(models.Model):
 	id=models.AutoField(unique=True,primary_key=True)

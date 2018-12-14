@@ -425,14 +425,15 @@ def agentePasaje(request,idAgente):
 		pasaje.save()
 		
 		return reportePasaje(request,pasaje.id)
-		redirect ('agente')
+		
 		
 	
 	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
 	else:
 		form=formularioPasajeAgente()
 		
-	titulo="Generar nuevo pasaje"	
+	titulo="Generar nuevo pasaje"
+		
 	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
 
 #*************FIN REPORTES*************#
