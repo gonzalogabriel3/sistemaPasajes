@@ -6,11 +6,10 @@
 	<form action="" method="POST" target="_blank">{% csrf_token %}
 		<label><b>Agente:</b></label>
 		<input type="text" placeholder="{{agente.nombre}} {{agente.apellido}}" disabled readonly>
-		<input type="number" name="idAgenteFormulario" hidden value={{agente.id}}>
 		{{form.as_p}}
 		<br>
 		<center>
-			<input type="submit" value="Guardar" class="btn btn-success">
+			<input type="submit" value="Generar reporte pasaje" class="btn btn-success">
 			<a href="{% url 'agente' %}"  class="btn btn-danger">Cancelar</a>
 		</center>
 	</form>
