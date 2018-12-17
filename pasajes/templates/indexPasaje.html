@@ -1,8 +1,20 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
+<!--Cargo el load static por si hay que mostrar alguna imagen desde el directorio assets-->
+{% load static %}
 <br>
-<a href="{% url 'altaPasaje' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
+<center><h2 style="color:#03585a">Adm.Pasajes</h2></center>
+<!--Valido si se recibe algun mensjae para mostrar-->
+{% if messages %}
+	<div class="alert alert-success">
+	{% for message in messages %}
+		<img src="{% static 'ok.png' %}" alt="imagenOk" style="display:inline-block;width: 25px;height: 25px" />
+    	<p style="display:inline-block;"><strong>{{ message }}</strong></p>
+    {% endfor %}
+	</div>
+{% endif %}
+<a href="{% url 'altaPasaje' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
 <br><br>
 	{% if pasajes %}
 	<table class="datatable display" style="width:100%">
@@ -12,6 +24,8 @@
 				<th>Agente</th>
 				<th>Dni</th>
 				<th>Empresa</th>
+				<th>Via</th>
+				<th>Fecha de viaje</th>
 				<th>Fecha de emision</th>
 				<th>Origen</th>
 				<th>Destino</th>
@@ -25,12 +39,15 @@
 	        	<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
 	        	<td>{{ pasaje.id_agente.documento }}</td>
 	        	<td>{{ pasaje.id_empresa.nombre }}</td>
+	        	<td>{{ pasaje.via }}</td>
+	        	<td>{{ pasaje.fecha_viaje }}</td>
 	        	<td>{{ pasaje.fecha_emision }}</td>
 	        	<td>{{ pasaje.origen }}</td>
 				<td>{{ pasaje.destino }}</td>
 				<td>
-	        		<a href="{% url 'modificacionPasaje' pasaje.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>Editar</a>
-	        		<a href="{% url 'bajaPasaje' pasaje.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        		<a href="{% url 'modificacionPasaje' pasaje.id %}" class="btn btn-warning" style="display: inline-block;"><span class="glyphicon glyphicon-edit"></span>Editar</a>
+	        		<a href="{% url 'bajaPasaje' pasaje.id %}" class="btn btn-danger" style="display: inline-block;"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
+	        		<a href="{% url 'reportePasaje' pasaje.id %}" target="_blank" class="btn btn-info" style="display: inline-block;"><span class="glyphicon glyphicon glyphicon-file"></span> Generar reporte</a>
 	        	</td>
 	    	</tr>
 	        	
@@ -43,6 +60,8 @@
 				<th>Agente</th>
 				<th>Dni</th>
 				<th>Empresa</th>
+				<th>Via</th>
+				<th>Fecha de viaje</th>
 				<th>Fecha de emision</th>
 				<th>Origen</th>
 				<th>Destino</th>
@@ -53,10 +72,6 @@
 {% else %}
     <p>No hay pasajes a mostrar</p>
 {% endif %}
-			<br><br>
-			<!--indico el nombre de la url definido en urls/urlpatterns-->
-    		<center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
-		
-		
+					
 
 {% endblock %}

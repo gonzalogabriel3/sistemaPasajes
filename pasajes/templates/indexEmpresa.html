@@ -1,8 +1,21 @@
 {% extends "plantillaBase.html" %}
 
 {% block contenido %}
+<!--Cargo el load static por si hay que mostrar alguna imagen desde el directorio assets-->
+{% load static %}
 <br>
-<a href="{% url 'altaEmpresa' %}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nueva empresa</a>
+<center><h2 style="color:#03585a">Adm.Empresas</h2></center>
+<!--Valido si se recibe algun mensjae para mostrar-->
+{% if messages %}
+	<div class="alert alert-success">
+	{% for message in messages %}
+		<img src="{% static 'ok.png' %}" alt="imagenOk" style="display:inline-block;width: 25px;height: 25px" />
+    	<p style="display:inline-block;"><strong>{{ message }}</strong></p>
+    {% endfor %}
+	</div>
+{% endif %}
+<a href="{% url 'altaEmpresa' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nueva empresa</a>
+
 <br><br>
 	{% if empresas %}
 	<table class="datatable display" style="width:100%">
@@ -45,7 +58,5 @@
     <p>No hay empresas a mostrar</p>
 {% endif %}
 
-		<br><br>
-    	<center><a href="{% url 'index' %}"  class="btn btn-info">Volver</a></center>
 
 {% endblock %}

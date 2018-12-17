@@ -1,6 +1,5 @@
 from django import forms
 from .models import *
-#from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import *
 
 class formularioAgente(forms.ModelForm):
@@ -17,7 +16,7 @@ class formularioAgente(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del agente",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+	fecha_nacimiento=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -55,7 +54,7 @@ class formularioFamiliar(forms.ModelForm):
 	documento = forms.IntegerField(label="Documento del familiar",
 		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
 
-	fecha_nacimiento=forms.DateField(widget=forms.TextInput(attrs=
+	fecha_nacimiento=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -81,15 +80,20 @@ class formularioEmpresa(forms.ModelForm):
 		model=Empresa
 		exclude=['id']
 
-
-
 class formularioPasaje(forms.ModelForm):
+	VIAS = (
+		('Terrestre', 'Terrestre'),
+	    ('Aerea', 'Aerea')
+	    
+	)
 
 	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
 
-	fecha_emision=forms.DateField(widget=forms.TextInput(attrs=
+	via=forms.ChoiceField(label="Via",choices=VIAS,widget=Select2Widget)
+
+	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
                                 {
                                     'class':'datepicker'
                                 }))
@@ -104,5 +108,37 @@ class formularioPasaje(forms.ModelForm):
 
 	class Meta:
 		model=Pasaje
-		exclude=['id']
+		exclude=['id','fecha_emision']
 		#(Si se desea que la fecha sea automatica)exclude=['id','fecha_emision']
+
+class formularioPasajeAgente(forms.ModelForm):
+	VIAS = (
+		('Terrestre', 'Terrestre'),
+	    ('Aerea', 'Aerea')
+	)
+
+	#id_agente=forms.CharField(label="Agente",initial="nombreAgente",widget=forms.TextInput(attrs={'readonly':'readonly'}))
+
+	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget(attrs={'name':'id_empresa'}))
+
+	via=forms.ChoiceField(label="Via",choices=VIAS,widget=Select2Widget(attrs={'name':'via'}))
+
+	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
+                                {
+                                    'class':'datepicker',
+                                    'name':'fecha_viaje'
+                                }))
+	
+	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
+	origen = forms.CharField(max_length=100,label="Origen",
+		widget = forms.TextInput(attrs = {'class': 'form-control','name':'origen'} ))
+
+	destino =  forms.CharField(max_length=100,label="Destino",
+		widget = forms.TextInput(attrs = {'class': 'form-control','name':'destino'} ))
+
+	class Meta:
+		model=Pasaje
+		exclude=['id','id_agente','fecha_emision']
+
+
+	

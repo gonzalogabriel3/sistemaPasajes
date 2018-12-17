@@ -1,13 +1,32 @@
 {% extends "plantillaBase.html" %}
-
+{% load static %}
 {% block contenido %}
-	<center><h2 style="color:#16a795">Inicio</h2>
-	<br>
-	<a href="agente" class="btn btn-primary">Menu agentes</a>
-	<a href="localidad" class="btn btn-primary">Menu localidades</a>
-	<a href="familiar" class="btn btn-primary">Menu familiares</a>
-	<a href="empresa" class="btn btn-primary">Menu empresas</a>
-	<a href="pasaje" class="btn btn-primary">Menu pasajes</a>
-	</center>
+	
+		<center><h1 style="color:#03585a" style="display: inline-block;"><i>Administraci&oacuten</i></h1></center>
+		<br><br><br> 
+		 <div class="list-group" >
+		  
+		  <li class="list-group-item"><i class="material-icons">person</i> <a style="font-size: 18px;" href="{% url 'agente' %}">Adm.Agentes</a></li>
+		  
+		  <li class="list-group-item"><i class="material-icons">location_city</i> <a style="font-size: 18px;" href="{% url 'localidad' %}">Adm.Localidades</a></li>
+		  
+		  <li class="list-group-item"><i class="material-icons">group</i> <a style="font-size: 18px;" href="{% url 'familiar' %}">Adm.Familiares</a></li>
+		  
+		  <li class="list-group-item"><i class="material-icons">business</i> <a style="font-size: 18px;" href="{% url 'empresa' %}">Adm.Empresas</a></li>
+		  
+		  <li class="list-group-item"><i class="material-icons">confirmation_number</i> <a style="font-size: 18px;" href="{% url 'pasaje' %}">Adm.Pasajes</a></li>
+		
+		</div> 
 
+	
+<!-- Footer -->
+<footer style="margin-top: 254px">
+	<div style="background-color: #77afb0;padding: 20px">
+		<center>
+			<img src="{% static 'favicon.png' %}" alt="imagenLogo" style="display: inline-block;width:80px;height:40px;"/>
+			<strong style="display: inline-block;margin-left: 5px">Diciembre 2018</strong>
+		</center>
+	</div>
+</footer>
+<!-- Footer -->
 {% endblock %}
