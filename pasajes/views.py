@@ -4,7 +4,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
+from .funciones import *
 import datetime
+
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, HttpRequest
+from django.template.loader import render_to_string
+from weasyprint import HTML
 # Create your views here
 
 #################################INDEX'S#################################################
@@ -337,5 +343,3 @@ def modificacionPasaje(request,idPasaje):
 
 
 #********FIN ABM PASAJE***********#
-
-

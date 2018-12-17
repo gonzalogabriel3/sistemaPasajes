@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('agente', views.indexAgenteView, name='agente'),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('bajaPasaje/<int:idPasaje>/', views.bajaPasaje, name='bajaPasaje'),
     path('modificacionPasaje/<int:idPasaje>/', views.modificacionPasaje, name='modificacionPasaje'),
 
+    path('generate_pdf', views.generate_pdf, name='generate_pdf'),
 ]
