@@ -445,7 +445,7 @@ def agentePasaje(request,idAgente):
 		form=formularioPasajeAgente()
 		
 	titulo="Generar nuevo pasaje"
-		
+
 	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
 
 #*************FIN REPORTES*************#
