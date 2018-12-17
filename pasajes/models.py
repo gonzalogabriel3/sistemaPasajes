@@ -55,4 +55,12 @@ class Pasaje(models.Model):
     def __str__(self):
     	return str(self.id)+"/"+self.origen+"-"+self.destino+"/"+self.id_empresa.nombre
 
+class PasajesPasajero(models.Model):
+    id=models.AutoField(unique=True,primary_key=True)
+    id_agente = models.ForeignKey(PasajesAgente, on_delete=models.CASCADE, verbose_name="Agente")
+    id_familiar = models.ForeignKey(PasajesFamiliar, on_delete=models.CASCADE, verbose_name="Familiar", blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pasajes_pasajero'
 
