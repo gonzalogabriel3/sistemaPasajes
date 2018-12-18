@@ -33,7 +33,7 @@
 	    {% for pasajero in pasajeros %}
 	    	<tr>
 	        	<td>{{ pasajero.id }}</td>
-	        	{% if pasajero.id_familiar.id != 0 %}
+	        	{% if pasajero.id_familiar.id%}
 	        		<td>{{ pasajero.id_familiar.nombre }}</td>
 	        		<td>{{ pasajero.id_familiar.apellido }}</td>
 	        		<td>{{ pasajero.id_familiar.documento }}</td>
