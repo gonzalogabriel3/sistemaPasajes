@@ -65,9 +65,6 @@ class Pasajero(models.Model):
         db_table = 'pasajes_pasajero'
 
     def __str__(self):
-    	#if self.id_familiar >=0 :
-    		
-    	#else:
     	if self.id_familiar is None :
     		return self.id_agente.apellido + " " + self.id_agente.nombre
     	else:
