@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
-<<<<<<< HEAD
 from .funciones import *
 import datetime
 
@@ -12,7 +11,6 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpRequest
 from django.template.loader import render_to_string
 from weasyprint import HTML
-=======
 import datetime, time
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -21,8 +19,6 @@ from weasyprint import HTML
 import tempfile
 from django.contrib import messages
 
-
->>>>>>> 1398132fd0e80f6405c2bd0e05600589c06d53ca
 # Create your views here
 
 #################################INDEX'S#################################################
@@ -371,8 +367,7 @@ def modificacionPasaje(request,idPasaje):
 
 
 #********FIN ABM PASAJE***********#
-<<<<<<< HEAD
-=======
+
 
 
 #********REPORTES********************#
@@ -449,4 +444,4 @@ def agentePasaje(request,idAgente):
 	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
 
 #*************FIN REPORTES*************#
->>>>>>> 1398132fd0e80f6405c2bd0e05600589c06d53ca
+

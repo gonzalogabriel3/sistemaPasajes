@@ -57,8 +57,8 @@ class Pasaje(models.Model):
 
 class PasajesPasajero(models.Model):
     id=models.AutoField(unique=True,primary_key=True)
-    id_agente = models.ForeignKey(PasajesAgente, on_delete=models.CASCADE, verbose_name="Agente")
-    id_familiar = models.ForeignKey(PasajesFamiliar, on_delete=models.CASCADE, verbose_name="Familiar", blank=True, null=True)
+    id_agente = models.ForeignKey(Agente, on_delete=models.CASCADE, verbose_name="Agente")
+    id_familiar = models.ForeignKey(Familiar, on_delete=models.CASCADE, verbose_name="Familiar", blank=True, null=True)
 
     class Meta:
         managed = False

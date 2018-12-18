@@ -42,7 +42,7 @@ urlpatterns = [
     path('bajaPasaje/<int:idPasaje>/', views.bajaPasaje, name='bajaPasaje'),
     path('modificacionPasaje/<int:idPasaje>/', views.modificacionPasaje, name='modificacionPasaje'),
 
-    path('generate_pdf', views.generate_pdf, name='generate_pdf'),
+    #path('generate_pdf', views.generate_pdf, name='generate_pdf'),
 ]
 
 urlpatterns+= staticfiles_urlpatterns()
