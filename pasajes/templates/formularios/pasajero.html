@@ -1,0 +1,15 @@
+{% extends "plantillaBase.html" %}
+
+{% block contenido %}
+	<center><h2 style="color:grey">{{titulo}}</h2></center>
+	<br>
+	<form action="" method="POST" target="_blank">{% csrf_token %}
+		{{form.as_p}}
+		<br>
+		<center>
+			<input type="submit" value="Generar reporte pasaje" class="btn btn-success">
+			<a href="{% url 'pasaje' %}"  class="btn btn-info">Volver</a>
+		</center>
+	</form>
+	
+{% endblock %}

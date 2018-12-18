@@ -68,7 +68,14 @@ def indexPasajeView(request):
 	
 	return render(request, 'indexPasaje.html', context)
 
-
+def indexPasajeroView(request):
+	pasajeros=Pasajero.objects.all().order_by('-id')
+	
+	context={
+		'pasajeros':pasajeros,
+	}
+	
+	return render(request, 'indexPasajero.html', context)
 ################FIN DE INDEX'S########################################
 
 
@@ -398,6 +405,52 @@ def agentePasaje(request,idAgente):
 	#Si se recibe por POST creo una nueva instancia de Pasaje()
 	if(request.method == 'POST'):
 		form=formularioPasajeAgente(request.POST)
+		
+		pasaje=Pasaje()
+		
+		#El id del agente le indico que es el objeto "agente" que busque previamente(si indico agente.id tira error)
+		pasaje.id_agente = agente
+
+		#Obtengo la fecha del formulario y le cambio el formato para poder guardarlo en el campor "fecha_viaje"
+		fecha=request.POST.get('fecha_viaje')
+		fecha = datetime.datetime.strptime(fecha,"%d/%m/%Y").strftime("%Y-%m-%d") 
+		pasaje.fecha_viaje=fecha
+		
+		#Obtengo el id de la empresa desde el formulario(busco ese objeto empresa) y se lo asigno al campo "id_empresa" del objeto pasaje
+		id_empresa=request.POST.get('id_empresa')
+		empresa=Empresa.objects.get(id=id_empresa)
+		pasaje.id_empresa=empresa
+
+		#Indico la fecha de emision
+		pasaje.fecha_emision=datetime.datetime.now()-datetime.timedelta(hours=3)
+
+		#Obtengo la via,origen,y destino desde el formulario y se lo asigno al objeto pasaje
+		pasaje.via=request.POST.get('via')
+		pasaje.origen=request.POST.get('origen')
+		pasaje.destino=request.POST.get('destino')
+
+		#Guardo el nuevo pasaje y retorno al metodo que genera el reporte en pdf,pasandole el id del pasaje nuevo
+		pasaje.save()
+		
+		return reportePasaje(request,pasaje.id)
+		
+		
+	
+	#Si el request no es POST(GET) creo el formulario y lo renderizo en una vista
+	else:
+		form=formularioPasajeAgente()
+		
+	titulo="Generar nuevo pasaje"
+
+	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
+
+
+def pasajero(request,idPasajero):
+	pasajero=Pasajero.objects.get(id=idPasajero)
+
+	#Si se recibe por POST creo una nueva instancia de Pasaje()
+	if(request.method == 'POST'):
+		form=formularioPasajero(request.POST)
 		
 		pasaje=Pasaje()
 		
