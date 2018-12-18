@@ -1,19 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
-<<<<<<< HEAD
-=======
 from .funciones import *
-import datetime
-
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse, HttpRequest
-from django.template.loader import render_to_string
-from weasyprint import HTML
->>>>>>> b835ed9e3265cff993fe922cc7d7fc9f94dfc6d1
 import datetime, time
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -21,10 +12,7 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
 from django.contrib import messages
-<<<<<<< HEAD
-=======
 
->>>>>>> b835ed9e3265cff993fe922cc7d7fc9f94dfc6d1
 # Create your views here
 
 #################################INDEX'S#################################################

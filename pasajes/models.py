@@ -57,13 +57,8 @@ class Pasaje(models.Model):
 
 class Pasajero(models.Model):
     id=models.AutoField(unique=True,primary_key=True)
-<<<<<<< HEAD
     id_agente=models.ForeignKey(Agente, on_delete=models.CASCADE,verbose_name="Agente")
     id_familiar=models.ForeignKey(Familiar, on_delete=models.CASCADE, verbose_name="Familiar", blank=True, null=True)
-=======
-    id_agente = models.ForeignKey(Agente, on_delete=models.CASCADE, verbose_name="Agente")
-    id_familiar = models.ForeignKey(Familiar, on_delete=models.CASCADE, verbose_name="Familiar", blank=True, null=True)
->>>>>>> b835ed9e3265cff993fe922cc7d7fc9f94dfc6d1
 
     class Meta:
         managed = False
