@@ -445,7 +445,7 @@ def agentePasaje(request,idAgente):
 	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
 
 
-def pasajero(request,idPasajero):
+def formularioPasajero(request,idPasajero):
 	pasajero=Pasajero.objects.get(id=idPasajero)
 
 	#Si se recibe por POST creo una nueva instancia de Pasaje()
@@ -488,7 +488,7 @@ def pasajero(request,idPasajero):
 		
 	titulo="Generar nuevo pasaje"
 
-	return render(request,'formularios/agentePasaje.html',{'form':form,'titulo':titulo,'agente':agente})
+	return render(request,'formularios/pasajero.html',{'form':form,'titulo':titulo,'pasajero':pasajero})
 
 #*************FIN REPORTES*************#
 

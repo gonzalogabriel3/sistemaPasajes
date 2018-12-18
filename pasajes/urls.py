@@ -43,7 +43,7 @@ urlpatterns = [
     path('modificacionPasaje/<int:idPasaje>/', views.modificacionPasaje, name='modificacionPasaje'),
 
     path('pasajero', views.indexPasajeroView, name='pasajero'),
-    
+    path('formularioPasajero/<int:idPasajero>/', views.formularioPasajero, name='formularioPasajero'),
 
 ]
 
