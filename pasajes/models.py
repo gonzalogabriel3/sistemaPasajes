@@ -64,5 +64,11 @@ class Pasajero(models.Model):
         managed = False
         db_table = 'pasajes_pasajero'
 
-    #def __str__(self):
-    #	return str(self.id)+"/"+self.origen+"-"+self.destino+"/"+self.id_empresa.nombre
+    def __str__(self):
+    	#if self.id_familiar >=0 :
+    		
+    	#else:
+    	if self.id_familiar is None :
+    		return self.id_agente.apellido + " " + self.id_agente.nombre
+    	else:
+    		return self.id_familiar.apellido + " " + self.id_familiar.nombre + "("+self.id_agente.apellido+" "+self.id_agente.nombre+")"
