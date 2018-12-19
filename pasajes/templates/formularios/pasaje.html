@@ -3,13 +3,18 @@
 {% block contenido %}
 	<center><h2 style="color:grey">{{titulo}}</h2></center>
 	<br>
-	<form action="" method="POST">{% csrf_token %}
+	<form action="" method="POST" target="_blank">{% csrf_token %}
+		<label><b>Pasajero:</b></label>
+		{% if pasajero.id_familiar.id %}
+			<input type="text" placeholder="{{pasajero.id_familiar.apellido}} {{pasajero.id_familiar.nombre}}" disabled readonly>
+		{% else %}
+			<input type="text" placeholder="{{pasajero.id_agente.apellido}} {{pasajero.id_agente.nombre}}" disabled readonly>
+		{% endif %}
 		{{form.as_p}}
 		<br>
 		<center>
-			<input type="submit" value="Guardar" class="btn btn-success">
-			<a href="{% url 'pasaje' %}"  class="btn btn-danger">Cancelar</a>
-			
+			<input type="submit" value="Generar reporte pasaje" class="btn btn-success">
+			<a href="{% url 'pasajero' %}"  class="btn btn-info">Volver</a>
 		</center>
 	</form>
 	

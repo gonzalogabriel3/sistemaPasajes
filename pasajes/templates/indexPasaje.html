@@ -4,7 +4,7 @@
 <!--Cargo el load static por si hay que mostrar alguna imagen desde el directorio assets-->
 {% load static %}
 <br>
-<center><h2 style="color:#03585a">Adm.Pasajes</h2></center>
+<center><h2 style="color:#03585a">Pasajes emitidos</h2></center>
 <!--Valido si se recibe algun mensjae para mostrar-->
 {% if messages %}
 	<div class="alert alert-success">
@@ -14,15 +14,14 @@
     {% endfor %}
 	</div>
 {% endif %}
-<a href="{% url 'altaPasaje' %}" class="btn btn-success" style="display: inline-block;"><span class="glyphicon glyphicon-plus"></span> Nuevo pasaje</a>
 <br><br>
 	{% if pasajes %}
 	<table class="datatable display" style="width:100%">
 		<thead>
 			<tr>
 				<th>Id pasaje</th>
-				<th>Agente</th>
-				<th>Dni</th>
+				<th>Pasajero</th>
+				<th>Familiar de</th>
 				<th>Empresa</th>
 				<th>Via</th>
 				<th>Fecha de viaje</th>
@@ -36,8 +35,13 @@
 	    {% for pasaje in pasajes %}
 	    	<tr>
 	        	<td>{{ pasaje.id }}</td>
-	        	<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
-	        	<td>{{ pasaje.id_agente.documento }}</td>
+	        	{% if pasaje.id_familiar %}
+	        		<td>{{ pasaje.id_familiar.apellido }} {{ pasaje.id_familiar.nombre }}</td>
+	        		<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
+	     	    {% else %}
+	        		<td>{{ pasaje.id_agente.apellido }} {{ pasaje.id_agente.nombre }}</td>
+	        		<td> - </td>
+	        	{% endif %}
 	        	<td>{{ pasaje.id_empresa.nombre }}</td>
 	        	<td>{{ pasaje.via }}</td>
 	        	<td>{{ pasaje.fecha_viaje }}</td>
@@ -45,12 +49,9 @@
 	        	<td>{{ pasaje.origen }}</td>
 				<td>{{ pasaje.destino }}</td>
 				<td>
-	        		<a href="{% url 'modificacionPasaje' pasaje.id %}" class="btn btn-warning" style="display: inline-block;"><span class="glyphicon glyphicon-edit"></span>Editar</a>
 	        		<a href="{% url 'bajaPasaje' pasaje.id %}" class="btn btn-danger" style="display: inline-block;"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
 	        		<a href="{% url 'reportePasaje' pasaje.id %}" target="_blank" class="btn btn-info" style="display: inline-block;"><span class="glyphicon glyphicon glyphicon-file"></span> Generar reporte</a>
 	        	</td>
-	    	</tr>
-	        	
 	    	</tr>
 	    {% endfor %}
 	    </tbody>
@@ -58,7 +59,7 @@
 			<tr>
 				<th>Id pasaje</th>
 				<th>Agente</th>
-				<th>Dni</th>
+				<th>Familiar</th>
 				<th>Empresa</th>
 				<th>Via</th>
 				<th>Fecha de viaje</th>

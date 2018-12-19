@@ -22,8 +22,8 @@
 		<thead>
 			<tr>
 				<th>Id familiar</th>
-				<th>Nombre</th>
 				<th>Apellido</th>
+				<th>Nombre</th>
 				<th>DNI</th>
 				<th>Fecha nacimiento</th>
 				<th>Localidad</th>
@@ -36,8 +36,8 @@
 	    {% for familiar in familiares %}
 	    	<tr>
 	        	<td>{{ familiar.id }}</td>
-	        	<td>{{ familiar.nombre }}</td>
 	        	<td>{{ familiar.apellido }}</td>
+	        	<td>{{ familiar.nombre }}</td>
 	        	<td>{{ familiar.documento }}</td>
 	        	<td>{{ familiar.fecha_nacimiento }}</td>
 	        	<td>{{ familiar.id_localidad.nombre }}</td>
@@ -52,8 +52,8 @@
 	    <tfoot>
 			<tr>
 				<th>Id familiar</th>
-				<th>Nombre</th>
 				<th>Apellido</th>
+				<th>Nombre</th>
 				<th>DNI</th>
 				<th>Fecha nacimiento</th>
 				<th>Localidad</th>

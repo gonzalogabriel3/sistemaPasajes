@@ -84,40 +84,7 @@ class formularioPasaje(forms.ModelForm):
 	VIAS = (
 		('Terrestre', 'Terrestre'),
 	    ('Aerea', 'Aerea')
-	    
 	)
-
-	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
-
-	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget)
-
-	via=forms.ChoiceField(label="Via",choices=VIAS,widget=Select2Widget)
-
-	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
-                                {
-                                    'class':'datepicker'
-                                }))
-	
-	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
-	origen = forms.CharField(max_length=100,label="Origen",
-		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
-
-	destino =  forms.CharField(max_length=100,label="Destino",
-		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
-
-
-	class Meta:
-		model=Pasaje
-		exclude=['id','fecha_emision']
-		#(Si se desea que la fecha sea automatica)exclude=['id','fecha_emision']
-
-class formularioPasajeAgente(forms.ModelForm):
-	VIAS = (
-		('Terrestre', 'Terrestre'),
-	    ('Aerea', 'Aerea')
-	)
-
-	#id_agente=forms.CharField(label="Agente",initial="nombreAgente",widget=forms.TextInput(attrs={'readonly':'readonly'}))
 
 	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget(attrs={'name':'id_empresa'}))
 
@@ -138,34 +105,4 @@ class formularioPasajeAgente(forms.ModelForm):
 
 	class Meta:
 		model=Pasaje
-		exclude=['id','id_agente','fecha_emision']
-
-
-class formularioPasajero(forms.ModelForm):
-	VIAS = (
-		('Terrestre', 'Terrestre'),
-	    ('Aerea', 'Aerea')
-	)
-
-	#id_agente=forms.CharField(label="Agente",initial="nombreAgente",widget=forms.TextInput(attrs={'readonly':'readonly'}))
-
-	id_empresa=forms.ModelChoiceField(label="Empresa",queryset=Empresa.objects.all(),widget=Select2Widget(attrs={'name':'id_empresa'}))
-
-	via=forms.ChoiceField(label="Via",choices=VIAS,widget=Select2Widget(attrs={'name':'via'}))
-
-	fecha_viaje=forms.DateField(widget=forms.DateInput(attrs=
-                                {
-                                    'class':'datepicker',
-                                    'name':'fecha_viaje'
-                                }))
-	
-	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
-	origen = forms.CharField(max_length=100,label="Origen",
-		widget = forms.TextInput(attrs = {'class': 'form-control','name':'origen'} ))
-
-	destino =  forms.CharField(max_length=100,label="Destino",
-		widget = forms.TextInput(attrs = {'class': 'form-control','name':'destino'} ))
-
-	class Meta:
-		model=Pasajero
-		exclude=['id','fecha_emision']
+		exclude=['id','fecha_emision','id_agente','id_familiar'] 
