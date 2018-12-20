@@ -31,7 +31,7 @@ class formularioLocalidad(forms.ModelForm):
 	
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre de la localidad",
-		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+		widget = forms.TextInput(attrs = {'class': 'form-control'}))
 
 	class Meta:
 		model=Localidad
@@ -42,7 +42,7 @@ class formularioFamiliar(forms.ModelForm):
 	
 	id_localidad=forms.ModelChoiceField(label="Localidad",queryset=Localidad.objects.all(),widget=Select2Widget)
 
-	id_agente=forms.ModelChoiceField(label="Agente",queryset=Agente.objects.all(),widget=Select2Widget)
+	id_agente=forms.ModelChoiceField(label="Familiar del agente",queryset=Agente.objects.all(),widget=Select2Widget)
 
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre del familiar",

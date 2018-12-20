@@ -342,7 +342,7 @@ def bajaPasaje(request,idPasaje):
 		pasaje.delete()
 		return redirect('pasaje')
 
-	texto="el pasaje '"+str(pasaje.id)+"',emitido el dia "+str(pasaje.fecha_emision.strftime('%Y-%m-%d %H:%M'))+"?"
+	texto="el pasaje 'N°"+str(pasaje.id)+"',emitido el dia "+str(pasaje.fecha_emision.strftime('%Y-%m-%d %H:%M'))+"?"
 	nombreUrl="pasaje"
 
 	return render(request,'confirmaciones/eliminar.html',{'texto':texto,'nombreUrl':nombreUrl})

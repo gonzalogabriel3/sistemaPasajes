@@ -4,7 +4,7 @@
 <!--Cargo el load static por si hay que mostrar alguna imagen desde el directorio assets-->
 {% load static %}
 <br>
-<center><h2 style="color:#03585a">Adm.Pasajeros</h2></center>
+<center><h2 class="titulo">Administraci&oacuten de Pasajeros</h2></center>
 <!--Valido si se recibe algun mensjae para mostrar-->
 {% if messages %}
 	<div class="alert alert-success">
@@ -18,7 +18,7 @@
 {% if pasajeros %}
 	<table class="datatable display" style="width:100%">
 		<thead>
-			<tr>
+			<tr class="titulo_columna">
 				<th>Id pasajero</th>
 				<th>Apellido</th>
 				<th>Nombre</th>
@@ -32,29 +32,29 @@
 		<tbody>
 	    {% for pasajero in pasajeros %}
 	    	<tr>
-	        	<td>{{ pasajero.id }}</td>
+	        	<td><b>{{ pasajero.id }}</b></td>
 	        	{% if pasajero.id_familiar.id%}
-	        		<td>{{ pasajero.id_familiar.apellido }}</td>
-	        		<td>{{ pasajero.id_familiar.nombre }}</td>
-	        		<td>{{ pasajero.id_familiar.documento }}</td>
-	        		<td>{{ pasajero.id_familiar.fecha_nacimiento }}</td>
-	        		<td>{{ pasajero.id_familiar.id_localidad.nombre }}</td>
-	        		<td>{{ pasajero.id_agente.apellido }} {{ pasajero.id_agente.nombre }}</td>
+	        		<td><b>{{ pasajero.id_familiar.apellido }}</b></td>
+	        		<td><b>{{ pasajero.id_familiar.nombre }}</b></td>
+	        		<td><b>{{ pasajero.id_familiar.documento }}</b></td>
+	        		<td><b>{{ pasajero.id_familiar.fecha_nacimiento }}</b></td>
+	        		<td><b>{{ pasajero.id_familiar.id_localidad.nombre }}</b></td>
+	        		<td><b>{{ pasajero.id_agente.apellido }} {{ pasajero.id_agente.nombre }}</td>
 	        		<td><a href="{% url 'altaPasaje' pasajero.id %}" class="btn btn-info"><span class="glyphicon glyphicon-file"></span> Generar Pasaje</a></td>
 	        	{% else %}
-		        	<td>{{ pasajero.id_agente.apellido }}</td>
-		        	<td>{{ pasajero.id_agente.nombre }}</td>
-		        	<td>{{ pasajero.id_agente.documento }}</td>
-		        	<td>{{ pasajero.id_agente.fecha_nacimiento }}</td>
-		        	<td>{{ pasajero.id_agente.id_localidad.nombre }}</td>
-		        	<td>-</td>
+		        	<td><b>{{ pasajero.id_agente.apellido }}</b></td>
+		        	<td><b>{{ pasajero.id_agente.nombre }}</b></td>
+		        	<td><b>{{ pasajero.id_agente.documento }}</b></td>
+		        	<td><b>{{ pasajero.id_agente.fecha_nacimiento }}</b></td>
+		        	<td><b>{{ pasajero.id_agente.id_localidad.nombre }}</b></td>
+		        	<td><b>-</b></td>
 		        	<td><a href="{% url 'altaPasaje' pasajero.id %}" class="btn btn-info"><span class="glyphicon glyphicon-file"></span> Generar Pasaje</a></td>
 		       {% endif %}  	
 	    	</tr>
 	    {% endfor %}
 	    </tbody>
 	    <tfoot>
-			<tr>
+			<tr class="titulo_columna">
 				<th>Id pasajero</th>
 				<th>Apellido</th>
 				<th>Nombre</th>
