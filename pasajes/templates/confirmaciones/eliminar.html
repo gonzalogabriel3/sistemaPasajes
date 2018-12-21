@@ -2,13 +2,13 @@
 
 {% block contenido %}
 	
-	<h4>Desea eliminar  {{texto}}</h4>
+	<h4 style="color: #ba140a"><b>Desea eliminar {{texto}}</b></h4>
 	<center>
 	<form method="POST">
 		{% csrf_token %}
 
-		<input type="submit" value="Eliminar" class="btn btn-danger">
-		<a href="{% url nombreUrl %}"  class="btn btn-default">Cancelar</a>
+		<button type="submit" class="btn btn-danger">Eliminar <span class="glyphicon glyphicon-trash"></span></button>
+		<a href="{% url nombreUrl %}"  class="btn btn-default">Cancelar <span class="glyphicon glyphicon-remove"></span></a>
 
 	</form>
 	</center>

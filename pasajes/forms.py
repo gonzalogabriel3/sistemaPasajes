@@ -8,17 +8,18 @@ class formularioAgente(forms.ModelForm):
 	
 	#Creo los campos con el mismo nombre que el modelo para poder darle estilos
 	nombre = forms.CharField(max_length=100,label="Nombre del agente",
-		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+		widget = forms.TextInput(attrs = {'class': 'form-control','placeholder':'Nombre del nuevo agente'} ))
 
 	apellido = forms.CharField(max_length=100,label="Apellido del agente",
-		widget = forms.TextInput(attrs = {'class': 'form-control'} ))
+		widget = forms.TextInput(attrs = {'class': 'form-control','placeholder':'Apellido del nuevo agente'} ))
 
 	documento = forms.IntegerField(label="Documento del agente",
-		widget = forms.NumberInput(attrs = {'class': 'form-control'} ))
+		widget = forms.NumberInput(attrs = {'class': 'form-control','placeholder':'N° de documento del nuevo agente'} ))
 
 	fecha_nacimiento=forms.DateField(widget=forms.DateInput(attrs=
                                 {
-                                    'class':'datepicker'
+                                    'class':'datepicker',
+                              
                                 }))
 	#id_localidad=forms.IntegerField(label="Localidad",widget=forms.Select(queryset=Localidad.objects.all()))
 
