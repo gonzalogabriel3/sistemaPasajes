@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     
     #################INDEX'S#####################
-    path('', views.index, name='index'),
+    path('', views.index, name='index',),
     path('agente', views.indexAgenteView, name='agente'),
     path('localidad', views.indexLocalidadView, name='localidad'),
     path('familiar', views.indexFamiliarView, name='familiar'),
@@ -46,6 +46,7 @@ urlpatterns = [
     path('altaPasaje/<int:idPasajero>', views.altaPasaje, name='altaPasaje'),
     #Url para generar el reporte en pdf de un pasaje
     path('reportePasaje/<int:idPasaje>/', views.reportePasaje, name='reportePasaje'),
+    
 
 ]
 

@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pasajes',
-        'USER': 'postgres',
-        'PASSWORD': 'sistemasavp',
-        'HOST': '172.155.0.8',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -130,3 +126,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets')
 ]
+
+LOGIN_REDIRECT_URL = '/pasajes'
+
+LOGOUT_REDIRECT_URL = '/pasajes/login'

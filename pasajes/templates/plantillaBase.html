@@ -35,14 +35,28 @@
   	
 	<script>
 
-	  //Agrego la funcion datepicker(calendario) a todos los elementos con la clase 'datepicker'-->
+	  //Agrego la funcion datepicker(calendario) a todos los elementos con la clase 'datepicker',con max
+		//Date indico la fecha maxima permitida en el calendario-->
 	  $( function(){
 	    $( ".datepicker" ).datepicker({
 	    	dayNamesMin: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
 	    	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 	    	prevText:'<',
 	    	nextText:'>',
-	    	dateFormat: 'dd/mm/yy'
+	    	dateFormat: 'dd/mm/yy',
+				maxDate:-6570,
+	    	
+	    });
+	  });
+
+		$( function(){
+	    $( ".datepickerPasaje" ).datepicker({
+	    	dayNamesMin: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+	    	monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+	    	prevText:'<',
+	    	nextText:'>',
+	    	dateFormat: 'dd/mm/yy',
+				minDate:0,
 	    	
 	    });
 	  });
@@ -148,7 +162,7 @@
 	        <li><a href="{% url 'pasajero' %}" id="link_navbar"><b>Pasajeros</b></a></li>
 	        <li><a href="{% url 'pasaje' %}" id="link_navbar"><b>Pasajes emitidos</b></a></li>
 	        
-	        
+	        <li><a id="link_navbar" style="margin-left: 340px" href="{% url 'logout' %}"><b><span class="glyphicon glyphicon-log-out"></span> Salir</b></a></li>
 	      </ul>
 	    </div>
 	  </div>

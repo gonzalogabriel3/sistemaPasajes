@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	
+
+	<title>Login</title>
+	
+
+	<link rel="icon" href="{% static 'favicon.png' %}" type="image/png"/>
+
+	<link rel="stylesheet" href="{% static 'login/estilo.css' %}" type="text/css">
+
+	<!-- Css de Bootstrap -Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- Importo jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body class="container"  style="background-image: url('{% static 'login/fondo.png' %}')">
+	<center>
+		<div>
+			<div class="panelInicio">
+				<img src="{% static 'login/logoAVP2.png' %}" style="width: 140px;height: 120px;opacity: 0.8;margin-bottom: 38px;">
+				<form method="post">
+				  {% csrf_token %}
+				  {{ form.as_p }}
+				  <br>
+				  <button type="submit" class="boton-ingresar">Ingresar</button>
+				</form>
+			</div>
+		</div>
+	</center>
+
+<!-- Javascript de bootstrap Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+</body>
+</html>
